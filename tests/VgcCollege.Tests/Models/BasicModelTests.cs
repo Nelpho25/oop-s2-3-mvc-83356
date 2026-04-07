@@ -256,7 +256,7 @@ public class ExamResultModelTests
 
         // Assert
         Assert.Equal(0, result.Id);
-        Assert.Equal(0, result.Score);
+        Assert.Null(result.Score);
     }
 
     [Fact]
