@@ -192,6 +192,230 @@ public class DbInitializerTests
         Assert.Equal(existingCount, finalCount);
     }
 
+    [Fact]
+    public async Task InitializeAsync_CreatesAdminProfile()
+    {
+        // Arrange
+        var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+            .UseInMemoryDatabase(databaseName: "InitializerAdminProfileTest")
+            .Options;
+
+        using var context = new ApplicationDbContext(options);
+
+        var user = new ApplicationUser
+        {
+            Id = "admin-123",
+            UserName = "admin@vgc.ie",
+            Email = "admin@vgc.ie",
+            DisplayName = "Admin User"
+        };
+
+        var admin = new AdminProfile
+        {
+            IdentityUserId = user.Id,
+            FirstName = "Admin",
+            LastName = "User",
+            Email = "admin@vgc.ie"
+        };
+
+        // Act
+        context.Users.Add(user);
+        context.AdminProfiles.Add(admin);
+        await context.SaveChangesAsync();
+
+        // Assert
+        var savedAdmin = await context.AdminProfiles
+            .FirstOrDefaultAsync(a => a.Email == "admin@vgc.ie");
+        Assert.NotNull(savedAdmin);
+        Assert.Equal("Admin", savedAdmin.FirstName);
+    }
+
+    [Fact]
+    public async Task InitializeAsync_CreatesFacultyProfile()
+    {
+        // Arrange
+        var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+            .UseInMemoryDatabase(databaseName: "InitializerFacultyProfileTest")
+            .Options;
+
+        using var context = new ApplicationDbContext(options);
+
+        var user = new ApplicationUser
+        {
+            Id = "faculty-123",
+            UserName = "faculty@vgc.ie",
+            Email = "faculty@vgc.ie",
+            DisplayName = "Faculty User"
+        };
+
+        var faculty = new FacultyProfile
+        {
+            IdentityUserId = user.Id,
+            FirstName = "Faculty",
+            LastName = "User",
+            Email = "faculty@vgc.ie"
+        };
+
+        // Act
+        context.Users.Add(user);
+        context.FacultyProfiles.Add(faculty);
+        await context.SaveChangesAsync();
+
+        // Assert
+        var savedFaculty = await context.FacultyProfiles
+            .FirstOrDefaultAsync(f => f.Email == "faculty@vgc.ie");
+        Assert.NotNull(savedFaculty);
+        Assert.Equal("Faculty", savedFaculty.FirstName);
+    }
+
+    [Fact]
+    public async Task InitializeAsync_CreatesCourseEnrollment()
+    {
+        // Arrange
+        var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+            .UseInMemoryDatabase(databaseName: "InitializerEnrollmentTest")
+            .Options;
+
+        using var context = new ApplicationDbContext(options);
+
+        var branch = new Branch { Name = "Dublin", Address = "123 Street" };
+        context.Branches.Add(branch);
+        await context.SaveChangesAsync();
+
+        var course = new Course
+        {
+            Name = "Math 101",
+            BranchId = branch.Id,
+            StartDate = DateTime.UtcNow,
+            EndDate = DateTime.UtcNow.AddMonths(4)
+        };
+        context.Courses.Add(course);
+        await context.SaveChangesAsync();
+
+        var user = new ApplicationUser
+        {
+            Id = "student-123",
+            UserName = "student@vgc.ie",
+            Email = "student@vgc.ie"
+        };
+        context.Users.Add(user);
+        await context.SaveChangesAsync();
+
+        var studentProfile = new StudentProfile
+        {
+            IdentityUserId = user.Id,
+            FirstName = "Student",
+            LastName = "User",
+            StudentNumber = "STU-001",
+            Email = "student@vgc.ie"
+        };
+        context.StudentProfiles.Add(studentProfile);
+        await context.SaveChangesAsync();
+
+        var enrollment = new CourseEnrolment
+        {
+            CourseId = course.Id,
+            StudentProfileId = studentProfile.Id,
+            EnrolDate = DateTime.UtcNow
+        };
+
+        // Act
+        context.CourseEnrolments.Add(enrollment);
+        await context.SaveChangesAsync();
+
+        // Assert
+        var savedEnrollment = await context.CourseEnrolments
+            .FirstOrDefaultAsync(e => e.CourseId == course.Id);
+        Assert.NotNull(savedEnrollment);
+        Assert.Equal(course.Id, savedEnrollment.CourseId);
+    }
+
+    [Fact]
+    public async Task InitializeAsync_CreatesExam()
+    {
+        // Arrange
+        var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+            .UseInMemoryDatabase(databaseName: "InitializerExamTest")
+            .Options;
+
+        using var context = new ApplicationDbContext(options);
+
+        var branch = new Branch { Name = "Dublin", Address = "123 Street" };
+        context.Branches.Add(branch);
+        await context.SaveChangesAsync();
+
+        var course = new Course
+        {
+            Name = "Physics 101",
+            BranchId = branch.Id,
+            StartDate = DateTime.UtcNow,
+            EndDate = DateTime.UtcNow.AddMonths(4)
+        };
+        context.Courses.Add(course);
+        await context.SaveChangesAsync();
+
+        var exam = new Exam
+        {
+            Title = "Final Exam",
+            CourseId = course.Id,
+            MaxScore = 100,
+            ExamDate = DateTime.UtcNow.AddDays(30)
+        };
+
+        // Act
+        context.Exams.Add(exam);
+        await context.SaveChangesAsync();
+
+        // Assert
+        var savedExam = await context.Exams
+            .FirstOrDefaultAsync(e => e.Title == "Final Exam");
+        Assert.NotNull(savedExam);
+        Assert.Equal(100, savedExam.MaxScore);
+    }
+
+    [Fact]
+    public async Task InitializeAsync_CreatesAssignment()
+    {
+        // Arrange
+        var options = new DbContextOptionsBuilder<ApplicationDbContext>()
+            .UseInMemoryDatabase(databaseName: "InitializerAssignmentTest")
+            .Options;
+
+        using var context = new ApplicationDbContext(options);
+
+        var branch = new Branch { Name = "Dublin", Address = "123 Street" };
+        context.Branches.Add(branch);
+        await context.SaveChangesAsync();
+
+        var course = new Course
+        {
+            Name = "Chemistry 101",
+            BranchId = branch.Id,
+            StartDate = DateTime.UtcNow,
+            EndDate = DateTime.UtcNow.AddMonths(4)
+        };
+        context.Courses.Add(course);
+        await context.SaveChangesAsync();
+
+        var assignment = new Assignment
+        {
+            Title = "Lab Report",
+            CourseId = course.Id,
+            MaxScore = 50,
+            DueDate = DateTime.UtcNow.AddDays(14)
+        };
+
+        // Act
+        context.Assignments.Add(assignment);
+        await context.SaveChangesAsync();
+
+        // Assert
+        var savedAssignment = await context.Assignments
+            .FirstOrDefaultAsync(a => a.Title == "Lab Report");
+        Assert.NotNull(savedAssignment);
+        Assert.Equal(50, savedAssignment.MaxScore);
+    }
+
     // Helper methods
     private RoleManager<IdentityRole> CreateRoleManager(ApplicationDbContext context)
     {
