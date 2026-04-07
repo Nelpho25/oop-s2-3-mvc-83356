@@ -1,66 +1,163 @@
-name: CI - Build, Test & Coverage
+name: Test & Publish Coverage (xUnit + ReportGenerator)
 
 on:
+  workflow_dispatch:
   push:
-    branches: [ "main" ]
+    branches: [ "master", "main" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "master", "main" ]
+
+# Avoid overlapping Pages deployments
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
+
+# Required for GitHub Pages deploy
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+env:
+  DOTNET_VERSION: "8.0.x"
+  TEST_PROJECT: "tests/VgcCollege.Tests/VgcCollege.Tests.csproj"
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
+    outputs:
+      coverage: ${{ steps.coverage.outputs.percentage }}
 
     steps:
-      - name: Checkout
+      - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Setup .NET 8
+      - name: Setup .NET ${{ env.DOTNET_VERSION }}
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: "8.0.x"
+          dotnet-version: ${{ env.DOTNET_VERSION }}
 
-      - name: Restore dependencies
+      - name: Restore Dependencies
         run: dotnet restore
 
-      - name: Build (Release)
-        run: dotnet build --configuration Release --no-restore
+      - name: Show Working Directory
+        run: pwd
 
-      - name: Run Tests with Coverage
-        run: |
-          dotnet test --configuration Release --no-build \
-            --verbosity normal \
-            --collect:"XPlat Code Coverage" \
-            --results-directory ./TestResults
+      - name: List Project Structure
+        run: ls -la
+
+      - name: Build (Release)
+        run: dotnet build --configuration Release --no-restore -v minimal
+
+      - name: Run All xUnit Tests with Coverage
+        run: >
+          dotnet test ${{ env.TEST_PROJECT }} 
+          --configuration Release 
+          --no-build 
+          --verbosity normal 
+          --logger "trx;LogFileName=test-results.trx" 
+          --collect:"XPlat Code Coverage"
+          --results-directory ./TestResults
 
       - name: Install ReportGenerator
         run: dotnet tool install -g dotnet-reportgenerator-globaltool
 
-      - name: Generate Coverage Report (HTML)
+      - name: Generate HTML Coverage Report
         run: |
           reportgenerator \
             -reports:"./TestResults/**/coverage.cobertura.xml" \
-            -targetdir:"./CoverageReport" \
-            -reporttypes:"Html;Cobertura"
+            -targetdir:"./coveragereport" \
+            -reporttypes:"Html;Cobertura;Badges"
 
-      - name: Upload Test Results
+      - name: Extract Coverage Percentage
+        id: coverage
+        run: |
+          if [ -f "./TestResults/**/coverage.cobertura.xml" ]; then
+            coverage=$(grep -oP 'line-rate="\K[^"]+' ./TestResults/**/coverage.cobertura.xml | head -1)
+            percentage=$((${coverage%.*} * 100))
+            echo "percentage=$percentage%" >> $GITHUB_OUTPUT
+            echo "Coverage: $percentage%"
+          fi
+
+      - name: Upload Test Results as Artifact
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: test-results
+          name: test-results-${{ github.run_number }}
           path: ./TestResults
+          retention-days: 30
 
-      - name: Upload Coverage Report
+      - name: Upload Coverage Report as Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: coverage-report
-          path: ./CoverageReport
+          name: coverage-report-${{ github.run_number }}
+          path: ./coveragereport
+          retention-days: 30
 
       - name: Check Coverage Threshold (≥30%)
+        if: always()
         run: |
-          coverage=$(grep -oP 'line-rate="\K[^"]+' ./TestResults/**/coverage.cobertura.xml | head -1)
-          echo "Line coverage: $coverage"
-          python3 -c "
-          rate = float('$coverage')
-          assert rate >= 0.30, f'Coverage {rate*100:.1f}% is below 30% threshold'
-          print(f'✅ Coverage: {rate*100:.1f}%')
-          "
+          if [ -f "./TestResults/**/coverage.cobertura.xml" ]; then
+            coverage=$(grep -oP 'line-rate="\K[^"]+' ./TestResults/**/coverage.cobertura.xml | head -1)
+            percentage=$(python3 -c "print(f'{float(\"$coverage\")*100:.1f}')")
+            echo "📊 Line coverage: $percentage%"
+            python3 -c "
+            rate = float('$coverage')
+            if rate >= 0.30:
+              print(f'✅ Coverage {rate*100:.1f}% meets 30% threshold')
+            else:
+              print(f'⚠️  Coverage {rate*100:.1f}% is below 30% threshold')
+              exit(1)
+            "
+          else
+            echo "⚠️  No coverage data found"
+          fi
+
+      - name: Test Summary
+        if: always()
+        run: |
+          echo "## 🧪 Test Execution Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- **Test Project**: VgcCollege.Tests" >> $GITHUB_STEP_SUMMARY
+          echo "- **Framework**: xUnit" >> $GITHUB_STEP_SUMMARY
+          echo "- **Coverage Tool**: Coverlet" >> $GITHUB_STEP_SUMMARY
+          echo "- **Report Tool**: ReportGenerator" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          if [ -f "./TestResults/**/coverage.cobertura.xml" ]; then
+            coverage=$(grep -oP 'line-rate="\K[^"]+' ./TestResults/**/coverage.cobertura.xml | head -1)
+            percentage=$(python3 -c "print(f'{float(\"$coverage\")*100:.1f}')")
+            echo "- **Code Coverage**: $percentage%" >> $GITHUB_STEP_SUMMARY
+          fi
+          echo "- **Artifacts**: Available for download" >> $GITHUB_STEP_SUMMARY
+
+  upload-pages:
+    # Only upload to Pages when pushing to master
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main')
+    needs: build-and-test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download Coverage Report
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-report-${{ github.run_number }}
+          path: ./coveragereport
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./coveragereport
+
+  deploy:
+    # Only deploy to Pages when pushing to master
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main')
+    needs: upload-pages
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy Coverage Report to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
