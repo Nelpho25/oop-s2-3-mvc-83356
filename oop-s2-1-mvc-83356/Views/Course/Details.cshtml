@@ -1,0 +1,302 @@
+@model CourseDetailsViewModel
+
+@{
+    ViewData["Title"] = $"Course: {Model.Name}";
+}
+
+<div class="container-fluid py-4">
+    <!-- Header -->
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1 class="h3">
+                <i class="fas fa-book"></i> @Model.Name
+            </h1>
+            <p class="text-muted">@Model.BranchName Branch</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="@Url.Action("Edit", "Course", new { id = Model.Id })" class="btn btn-warning">
+                <i class="fas fa-edit"></i> Edit
+            </a>
+            <a href="@Url.Action("Delete", "Course", new { id = Model.Id })" class="btn btn-danger">
+                <i class="fas fa-trash"></i> Delete
+            </a>
+        </div>
+    </div>
+
+    <!-- Course Info -->
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Course Information</h5>
+                    <p><strong>Branch:</strong> @Model.BranchName</p>
+                    <p><strong>Start Date:</strong> @(Model.StartDate?.ToString("MMM dd, yyyy") ?? "N/A")</p>
+                    <p><strong>End Date:</strong> @(Model.EndDate?.ToString("MMM dd, yyyy") ?? "N/A")</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Quick Stats</h5>
+                    <p><strong>Enrolled Students:</strong> <span class="badge bg-success">@Model.EnrolledStudents.Count</span></p>
+                    <p><strong>Assigned Faculty:</strong> <span class="badge bg-info">@Model.AssignedFaculty.Count</span></p>
+                    <p><strong>Assignments:</strong> <span class="badge bg-warning">@Model.Assignments.Count</span></p>
+                    <p><strong>Exams:</strong> <span class="badge bg-secondary">@Model.Exams.Count</span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Faculty Assignments -->
+    <div class="card mb-4">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5 class="mb-0"><i class="fas fa-user-tie"></i> Assigned Faculty (@Model.AssignedFaculty.Count)</h5>
+            <button class="btn btn-sm btn-primary" data-bs-toggle="collapse" data-bs-target="#assignFacultyForm">
+                <i class="fas fa-plus"></i> Assign Faculty
+            </button>
+        </div>
+        
+        <!-- Assign Faculty Form -->
+        <div id="assignFacultyForm" class="collapse border-top p-3">
+            @if (Model.AvailableFaculty.Count > 0)
+            {
+                <form method="post" action="@Url.Action("AssignFaculty", "Course", new { id = Model.Id })" class="row g-3">
+                    @Html.AntiForgeryToken()
+
+                    <div class="col-md-6">
+                        <label for="facultySelect" class="form-label">Select Faculty</label>
+                        <select name="facultyId" id="facultySelect" class="form-select" required>
+                            <option value="">-- Choose Faculty --</option>
+                            @foreach (var fac in Model.AvailableFaculty)
+                            {
+                                <option value="@fac.Id">@fac.FullName (@fac.Email)</option>
+                            }
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 d-flex align-items-end">
+                        <button type="submit" class="btn btn-primary w-100">
+                            <i class="fas fa-check"></i> Assign
+                        </button>
+                    </div>
+                </form>
+            }
+            else
+            {
+                <p class="text-muted mb-0">All faculty members are already assigned to this course.</p>
+            }
+        </div>
+
+        <!-- Faculty List -->
+        <div class="table-responsive">
+            @if (Model.AssignedFaculty.Count == 0)
+            {
+                <div class="alert alert-info m-3 mb-0" role="alert">
+                    No faculty assigned yet.
+                </div>
+            }
+            else
+            {
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th class="text-center" style="width: 80px;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var fac in Model.AssignedFaculty)
+                        {
+                            <tr>
+                                <td>@fac.FacultyName</td>
+                                <td>@fac.Email</td>
+                                <td>
+                                    @if (fac.IsTutor)
+                                    {
+                                        <span class="badge bg-primary">Tutor</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-secondary">Lecturer</span>
+                                    }
+                                </td>
+                                <td class="text-center">
+                                    <form method="post" action="@Url.Action("RemoveFaculty", "Course", new { courseId = Model.Id, facultyId = fac.FacultyProfileId })" style="display:inline;">
+                                        @Html.AntiForgeryToken()
+                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Remove this faculty?');">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </form>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+
+    <!-- Enrolled Students -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0"><i class="fas fa-users"></i> Enrolled Students (@Model.EnrolledStudents.Count)</h5>
+        </div>
+        <div class="table-responsive">
+            @if (Model.EnrolledStudents.Count == 0)
+            {
+                <div class="alert alert-info m-3 mb-0" role="alert">
+                    No students enrolled yet.
+                </div>
+            }
+            else
+            {
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Student Number</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Status</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var student in Model.EnrolledStudents.OrderBy(s => s.StudentNumber))
+                        {
+                            <tr>
+                                <td><code>@student.StudentNumber</code></td>
+                                <td>@student.FullName</td>
+                                <td>@student.Email</td>
+                                <td>
+                                    @switch (student.Status)
+                                    {
+                                        case "Active":
+                                            <span class="badge bg-success">Active</span>
+                                            break;
+                                        case "Withdrawn":
+                                            <span class="badge bg-warning">Withdrawn</span>
+                                            break;
+                                        case "Completed":
+                                            <span class="badge bg-info">Completed</span>
+                                            break;
+                                    }
+                                </td>
+                                <td class="text-center">
+                                    <a href="@Url.Action("Details", "Student", new { id = student.StudentProfileId })" class="btn btn-sm btn-info">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+
+    <!-- Assignments -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0"><i class="fas fa-tasks"></i> Assignments (@Model.Assignments.Count)</h5>
+        </div>
+        <div class="table-responsive">
+            @if (Model.Assignments.Count == 0)
+            {
+                <div class="alert alert-info m-3 mb-0" role="alert">
+                    No assignments created yet.
+                </div>
+            }
+            else
+            {
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Name</th>
+                            <th>Due Date</th>
+                            <th>Max Score</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var assignment in Model.Assignments.OrderBy(a => a.DueDate))
+                        {
+                            <tr>
+                                <td>@assignment.Name</td>
+                                <td>@(assignment.DueDate?.ToString("MMM dd, yyyy") ?? "N/A")</td>
+                                <td>@assignment.MaxScore</td>
+                                <td class="text-center">
+                                    <a href="@Url.Action("AssignmentDetails", "Gradebook", new { id = assignment.Id })" class="btn btn-sm btn-info">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+
+    <!-- Exams -->
+    <div class="card mb-4">
+        <div class="card-header">
+            <h5 class="mb-0"><i class="fas fa-file-alt"></i> Exams (@Model.Exams.Count)</h5>
+        </div>
+        <div class="table-responsive">
+            @if (Model.Exams.Count == 0)
+            {
+                <div class="alert alert-info m-3 mb-0" role="alert">
+                    No exams created yet.
+                </div>
+            }
+            else
+            {
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Name</th>
+                            <th>Date</th>
+                            <th>Max Score</th>
+                            <th>Results Released</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var exam in Model.Exams.OrderBy(e => e.ExamDate))
+                        {
+                            <tr>
+                                <td>@exam.Name</td>
+                                <td>@exam.ExamDate.ToString("MMM dd, yyyy")</td>
+                                <td>@exam.MaxScore</td>
+                                <td>
+                                    @if (exam.ResultsReleased)
+                                    {
+                                        <span class="badge bg-success"><i class="fas fa-check"></i> Yes</span>
+                                    }
+                                    else
+                                    {
+                                        <span class="badge bg-danger"><i class="fas fa-times"></i> No</span>
+                                    }
+                                </td>
+                                <td class="text-center">
+                                    <a href="@Url.Action("Index", "Exam")" class="btn btn-sm btn-info">
+                                        <i class="fas fa-eye"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <a href="@Url.Action("Index", "Course")" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Back to Courses
+        </a>
+    </div>
+</div>

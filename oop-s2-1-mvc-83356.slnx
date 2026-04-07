@@ -1,0 +1,6 @@
+<Solution>
+  <Folder Name="/tests/">
+    <Project Path="tests/VgcCollege.Tests/VgcCollege.Tests.csproj" />
+  </Folder>
+  <Project Path="oop-s2-1-mvc-83356/oop-s2-1-mvc-83356.csproj" />
+</Solution>

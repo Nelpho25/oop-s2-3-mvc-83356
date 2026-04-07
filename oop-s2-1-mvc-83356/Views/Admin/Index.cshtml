@@ -1,0 +1,95 @@
+@model AdminDashboardViewModel
+@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="container-fluid mt-4">
+    <h1 class="mb-4">📊 Admin Dashboard</h1>
+
+    <div class="row">
+        <div class="col-md-4 mb-3">
+            <div class="card border-primary">
+                <div class="card-body text-center">
+                    <h6 class="card-title text-muted">Total Branches</h6>
+                    <h2 class="text-primary mb-0">@Model.TotalBranches</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card border-success">
+                <div class="card-body text-center">
+                    <h6 class="card-title text-muted">Total Courses</h6>
+                    <h2 class="text-success mb-0">@Model.TotalCourses</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card border-info">
+                <div class="card-body text-center">
+                    <h6 class="card-title text-muted">Total Students</h6>
+                    <h2 class="text-info mb-0">@Model.TotalStudents</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-3">
+        <div class="col-md-4 mb-3">
+            <div class="card border-warning">
+                <div class="card-body text-center">
+                    <h6 class="card-title text-muted">Total Faculty</h6>
+                    <h2 class="text-warning mb-0">@Model.TotalFaculty</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card border-danger">
+                <div class="card-body text-center">
+                    <h6 class="card-title text-muted">Total Enrollments</h6>
+                    <h2 class="text-danger mb-0">@Model.TotalEnrolments</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card border-dark">
+                <div class="card-body text-center">
+                    <h6 class="card-title text-muted">Active Enrollments</h6>
+                    <h2 class="text-dark mb-0">@Model.ActiveEnrolments</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-12">
+            <h4>⚙️ Management</h4>
+            <nav class="list-group">
+                <a href="/Admin/Accounts" class="list-group-item list-group-item-action">
+                    <i class="bi bi-person-gear"></i> Manage User Accounts
+                </a>
+                <a href="/Admin/Branches" class="list-group-item list-group-item-action">
+                    <i class="bi bi-diagram-2"></i> Manage Branches
+                </a>
+                <a href="/Admin/Courses" class="list-group-item list-group-item-action">
+                    <i class="bi bi-book"></i> Manage Courses
+                </a>
+                <a href="/Admin/Students" class="list-group-item list-group-item-action">
+                    <i class="bi bi-people"></i> Manage Students
+                </a>
+                <a href="/Admin/Enrolments" class="list-group-item list-group-item-action">
+                    <i class="bi bi-pen"></i> Manage Enrollments
+                </a>
+                <a href="/Admin/Exams" class="list-group-item list-group-item-action">
+                    <i class="bi bi-file-text"></i> Manage Exams
+                </a>
+                <a href="/Gradebook/Courses" class="list-group-item list-group-item-action">
+                    <i class="bi bi-graph-up"></i> Gradebook
+                </a>
+            </nav>
+        </div>
+    </div>
+</div>

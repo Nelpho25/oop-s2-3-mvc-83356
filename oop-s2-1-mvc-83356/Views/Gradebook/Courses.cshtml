@@ -1,0 +1,25 @@
+@model List<Course>
+@{
+    ViewData["Title"] = "Gradebook - Courses";
+}
+
+<div class="container-fluid mt-4">
+    <h1 class="mb-4">Gradebook</h1>
+
+    @if (Model.Any())
+    {
+        <div class="list-group">
+            @foreach (var course in Model)
+            {
+                <a href="@Url.Action("Course", "Gradebook", new { courseId = course.Id })" class="list-group-item list-group-item-action">
+                    <h6 class="mb-1">@course.Name</h6>
+                    <small class="text-muted">@course.Branch?.Name | Start: @course.StartDate?.ToString("yyyy-MM-dd")</small>
+                </a>
+            }
+        </div>
+    }
+    else
+    {
+        <p class="text-muted">No courses assigned.</p>
+    }
+</div>

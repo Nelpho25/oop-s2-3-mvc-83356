@@ -1,0 +1,130 @@
+@model StudentGradesViewModel
+@{
+    ViewData["Title"] = "My Grades";
+}
+
+<div class="container-fluid mt-4">
+    <h1 class="mb-4">My Grades</h1>
+
+    <ul class="nav nav-tabs mb-3" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Dashboard", "StudentDashboard")">Enrollments</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active">Grades</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Attendance", "StudentDashboard")">Attendance</a>
+        </li>
+    </ul>
+
+    <div class="row">
+        <div class="col-12 mb-4">
+            <h4>Exam Results</h4>
+            @if (Model.ExamResults.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Course</th>
+                                <th>Exam Title</th>
+                                <th>Exam Date</th>
+                                <th>Score</th>
+                                <th>Grade</th>
+                                <th>Max Score</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var result in Model.ExamResults)
+                            {
+                                <tr>
+                                    <td>@result.Exam.Course.Name</td>
+                                    <td>@result.Exam.Title</td>
+                                    <td>@result.Exam.ExamDate?.ToString("yyyy-MM-dd")</td>
+                                    <td>
+                                        <strong>@result.Score?.ToString("F2")</strong>
+                                    </td>
+                                    <td>
+                                        <span class="badge bg-@GetGradeBadgeColor(result.Grade)">
+                                            @result.Grade
+                                        </span>
+                                    </td>
+                                    <td>@result.Exam.MaxScore</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <p class="text-muted">No exam results available yet or results have not been released.</p>
+            }
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <h4>Assignment Results</h4>
+            @if (Model.AssignmentResults.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Course</th>
+                                <th>Assignment</th>
+                                <th>Submitted</th>
+                                <th>Score</th>
+                                <th>Max Score</th>
+                                <th>Feedback</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var result in Model.AssignmentResults)
+                            {
+                                <tr>
+                                    <td>@result.Assignment.Course.Name</td>
+                                    <td>@result.Assignment.Title</td>
+                                    <td>@result.SubmittedAt?.ToString("yyyy-MM-dd HH:mm")</td>
+                                    <td>@result.Score?.ToString("F2")</td>
+                                    <td>@result.Assignment.MaxScore</td>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(result.Feedback))
+                                        {
+                                            <small>@result.Feedback</small>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">-</span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <p class="text-muted">No assignment results available yet.</p>
+            }
+        </div>
+    </div>
+</div>
+
+@functions {
+    private string GetGradeBadgeColor(string? grade)
+    {
+        return grade switch
+        {
+            "A" => "success",
+            "B" => "info",
+            "C" => "warning",
+            "D" => "warning",
+            "F" => "danger",
+            _ => "secondary"
+        };
+    }
+}

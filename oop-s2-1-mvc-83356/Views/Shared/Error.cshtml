@@ -1,0 +1,30 @@
+@{
+    ViewData["Title"] = "Error";
+    Layout = "_Layout";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card border-danger">
+                <div class="card-body text-center p-5">
+                    <i class="bi bi-exclamation-triangle-fill text-danger" style="font-size: 3rem;"></i>
+                    <h2 class="card-title text-danger mt-3">An Error Occurred</h2>
+                    <p class="card-text text-muted">
+                        Sorry, something went wrong while processing your request.
+                    </p>
+                    @if (!string.IsNullOrEmpty(ViewData["RequestId"]?.ToString()))
+                    {
+                        <p class="text-muted small">
+                            <strong>Request ID:</strong> <code>@ViewData["RequestId"]</code>
+                        </p>
+                    }
+
+                    <hr />
+
+                    <a href="@Url.Action("Index", "Home")" class="btn btn-primary">Go to Home</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,115 @@
+@model List<UserManagementViewModel>
+
+@{
+    ViewData["Title"] = "Account Management";
+}
+
+<div class="container-fluid py-4">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1 class="h3 mb-0">
+                <i class="bi bi-people-fill me-2"></i>Account Management
+            </h1>
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="#" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createUserModal">
+                <i class="bi bi-plus-circle me-2"></i>Create New Account
+            </a>
+        </div>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle me-2"></i>No user accounts found.
+        </div>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead class="table-light">
+                    <tr>
+                        <th>Email</th>
+                        <th>Display Name</th>
+                        <th>Role</th>
+                        <th>Status</th>
+                        <th>Created</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in Model)
+                    {
+                        <tr>
+                            <td>
+                                <code>@user.Email</code>
+                            </td>
+                            <td>@user.DisplayName</td>
+                            <td>
+                                <span class="badge bg-@GetRoleBadgeColor(user.UserRole)">
+                                    @user.UserRole
+                                </span>
+                            </td>
+                            <td>
+                                @if (user.IsActive)
+                                {
+                                    <span class="badge bg-success">Active</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-danger">Locked</span>
+                                }
+                            </td>
+                            <td>
+                                <small class="text-muted">@user.CreatedAt.ToString("dd MMM yyyy")</small>
+                            </td>
+                            <td>
+                                <a href="@Url.Action("Edit", new { id = user.Id })" class="btn btn-sm btn-outline-primary">
+                                    <i class="bi bi-pencil"></i> Edit
+                                </a>
+                                <a href="@Url.Action("Delete", new { id = user.Id })" class="btn btn-sm btn-outline-danger">
+                                    <i class="bi bi-trash"></i> Delete
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+
+<!-- Create User Modal -->
+<div class="modal fade" id="createUserModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create New Account</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-info">
+                    <i class="bi bi-info-circle me-2"></i>
+                    <strong>Note:</strong> User creation feature coming soon. Currently use registration page.
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+@functions {
+    string GetRoleBadgeColor(string role)
+    {
+        return role switch
+        {
+            "Admin" => "danger",
+            "Faculty" => "info",
+            "Student" => "primary",
+            _ => "secondary"
+        };
+    }
+}

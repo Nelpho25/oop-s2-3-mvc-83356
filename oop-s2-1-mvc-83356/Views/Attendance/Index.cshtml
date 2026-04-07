@@ -1,0 +1,36 @@
+@model List<Course>
+@{
+    ViewData["Title"] = "Attendance Management";
+}
+
+<div class="container-fluid mt-4">
+    <h1 class="mb-4">📋 Attendance Management</h1>
+
+    @if (!Model.Any())
+    {
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle"></i> No courses assigned yet.
+        </div>
+    }
+    else
+    {
+        <div class="row">
+            @foreach (var course in Model)
+            {
+                <div class="col-md-4 mb-3">
+                    <div class="card h-100">
+                        <div class="card-header bg-primary text-white">
+                            <h5 class="mb-0">@course.Name</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text text-muted">@course.Branch?.Name</p>
+                            <a asp-action="Course" asp-route-courseId="@course.Id" class="btn btn-primary btn-sm">
+                                <i class="bi bi-pencil"></i> Manage Attendance
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

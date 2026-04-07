@@ -1,0 +1,85 @@
+@model StudentDashboardViewModel
+@{
+    ViewData["Title"] = "Student Dashboard";
+}
+
+<div class="container-fluid mt-4">
+    <h1 class="mb-4">Student Dashboard</h1>
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Profile Information</h5>
+                    <p class="mb-2"><strong>Name:</strong> @Model.StudentName</p>
+                    <p class="mb-2"><strong>Student Number:</strong> @Model.StudentNumber</p>
+                    <p class="mb-0"><strong>Email:</strong> @Model.Email</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="card border-info">
+                <div class="card-body text-center">
+                    <h6 class="card-title text-muted">Enrolled Courses</h6>
+                    <h2 class="text-info mb-0">@Model.EnroledCourses</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="card border-success">
+                <div class="card-body text-center">
+                    <h6 class="card-title text-muted">Active</h6>
+                    <h2 class="text-success mb-0">@Model.ActiveEnrolments</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-2">
+            <div class="card border-primary">
+                <div class="card-body text-center">
+                    <h6 class="card-title text-muted">Completed</h6>
+                    <h2 class="text-primary mb-0">@Model.CompletedEnrolments</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <ul class="nav nav-tabs mb-3" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" href="@Url.Action("Dashboard", "StudentDashboard")">Enrollments</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Grades", "StudentDashboard")">Grades</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Attendance", "StudentDashboard")">Attendance</a>
+        </li>
+    </ul>
+
+    <div class="row">
+        <div class="col-12">
+            <h4>Course Enrollments</h4>
+            @if (Model.Enrolments.Any())
+            {
+                <div class="list-group">
+                    @foreach (var enrolment in Model.Enrolments)
+                    {
+                        <div class="list-group-item">
+                            <h6 class="mb-1">@enrolment.Course.Name</h6>
+                            <small class="text-muted">
+                                <span class="badge bg-@(enrolment.Status == CourseEnrolmentStatus.Active ? "success" : "secondary")">@enrolment.Status</span>
+                                | Enrolled: @enrolment.EnrolDate.ToString("yyyy-MM-dd")
+                            </small>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="text-muted">Not enrolled in any courses</p>
+            }
+        </div>
+    </div>
+</div>

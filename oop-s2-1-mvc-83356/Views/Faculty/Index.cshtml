@@ -1,0 +1,52 @@
+@model FacultyDashboardViewModel
+@{
+    ViewData["Title"] = "Faculty Dashboard";
+}
+
+<div class="container-fluid mt-4">
+    <h1 class="mb-4">Faculty Dashboard</h1>
+
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Profile Information</h5>
+                    <p class="mb-2"><strong>Name:</strong> @Model.FacultyName</p>
+                    <p class="mb-2"><strong>Department:</strong> @(Model.Department ?? "N/A")</p>
+                    <p class="mb-0"><strong>Assigned Courses:</strong> @Model.AssignedCourses</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card border-info">
+                <div class="card-body text-center">
+                    <h6 class="card-title text-muted">Total Students</h6>
+                    <h2 class="text-info mb-0">@Model.TotalStudents</h2>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <h4>Assigned Courses</h4>
+            @if (Model.Courses.Any())
+            {
+                <div class="list-group">
+                    @foreach (var course in Model.Courses)
+                    {
+                        <a href="#" class="list-group-item list-group-item-action">
+                            <h6 class="mb-1">@course.Name</h6>
+                            <small class="text-muted">@course.Branch?.Name</small>
+                        </a>
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="text-muted">No courses assigned</p>
+            }
+        </div>
+    </div>
+</div>

@@ -1,0 +1,97 @@
+@model List<AttendanceRecord>
+@{
+    ViewData["Title"] = "My Attendance";
+}
+
+<div class="container-fluid mt-4">
+    <h1 class="mb-4">Attendance Records</h1>
+
+    <ul class="nav nav-tabs mb-3" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Dashboard", "StudentDashboard")">Enrollments</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Grades", "StudentDashboard")">Grades</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link active">Attendance</a>
+        </li>
+    </ul>
+
+    @if (Model.Any())
+    {
+        var groupedByEnrolment = Model.GroupBy(a => a.CourseEnrolment.Course.Name);
+
+        @foreach (var courseGroup in groupedByEnrolment)
+        {
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="mb-0">@courseGroup.Key</h5>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive">
+                        <table class="table table-sm">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Week</th>
+                                    <th>Status</th>
+                                    <th>Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var record in courseGroup.OrderByDescending(a => a.SessionDate))
+                                {
+                                    <tr>
+                                        <td>@record.SessionDate.ToString("yyyy-MM-dd")</td>
+                                        <td>Week @record.WeekNumber</td>
+                                        <td>
+                                            @if (record.IsPresent)
+                                            {
+                                                <span class="badge bg-success">Present</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge bg-danger">Absent</span>
+                                            }
+                                        </td>
+                                        <td>
+                                            @if (!string.IsNullOrEmpty(record.Notes))
+                                            {
+                                                <small>@record.Notes</small>
+                                            }
+                                            else
+                                            {
+                                                <span class="text-muted">-</span>
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+
+                    @{
+                        var courseRecords = courseGroup.ToList();
+                        var presentCount = courseRecords.Count(a => a.IsPresent);
+                        var attendanceRate = courseRecords.Count > 0 ? (presentCount / (double)courseRecords.Count) * 100 : 0;
+                    }
+
+                    <div class="mt-3">
+                        <small class="text-muted">
+                            Attendance Rate: <strong>@attendanceRate.ToString("F1")%</strong> (@presentCount/@courseRecords.Count)
+                        </small>
+                        <div class="progress mt-2">
+                            <div class="progress-bar" role="progressbar" style="width: @attendanceRate%;" 
+                                 aria-valuenow="@attendanceRate" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    }
+    else
+    {
+        <p class="text-muted">No attendance records found.</p>
+    }
+</div>

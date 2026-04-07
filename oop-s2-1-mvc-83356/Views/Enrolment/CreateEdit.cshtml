@@ -1,0 +1,80 @@
+@model EnrolmentCreateEditViewModel
+
+@{
+    ViewData["Title"] = Model.PageTitle;
+}
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-clipboard-check"></i> @Model.PageTitle
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="@(Model.Id == 0 ? Url.Action("CreatePost", "Enrolment") : Url.Action("EditPost", "Enrolment", new { id = Model.Id }))">
+                        @Html.AntiForgeryToken()
+
+                        <div class="mb-3">
+                            <label asp-for="StudentProfileId" class="form-label">Student</label>
+                            <select asp-for="StudentProfileId" class="form-select">
+                                <option value="">-- Select Student --</option>
+                                @foreach (var student in Model.Students.OrderBy(s => s.StudentNumber))
+                                {
+                                    <option value="@student.Id">@student.FullName</option>
+                                }
+                            </select>
+                            <span asp-validation-for="StudentProfileId" class="invalid-feedback"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="CourseId" class="form-label">Course</label>
+                            <select asp-for="CourseId" class="form-select">
+                                <option value="">-- Select Course --</option>
+                                @foreach (var course in Model.Courses.OrderBy(c => c.Name))
+                                {
+                                    <option value="@course.Id">@course.Name</option>
+                                }
+                            </select>
+                            <span asp-validation-for="CourseId" class="invalid-feedback"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="EnrolmentDate" class="form-label">Enrolment Date</label>
+                            <input asp-for="EnrolmentDate" type="datetime-local" class="form-control">
+                            <span asp-validation-for="EnrolmentDate" class="invalid-feedback"></span>
+                        </div>
+
+                        @if (Model.Id != 0)
+                        {
+                            <div class="mb-3">
+                                <label asp-for="Status" class="form-label">Status</label>
+                                <select asp-for="Status" class="form-select">
+                                    <option value="Active">Active</option>
+                                    <option value="Withdrawn">Withdrawn</option>
+                                    <option value="Completed">Completed</option>
+                                </select>
+                                <span asp-validation-for="Status" class="invalid-feedback"></span>
+                            </div>
+                        }
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> @(Model.Id == 0 ? "Create Enrolment" : "Update Enrolment")
+                            </button>
+                            <a href="@Url.Action("Index", "Enrolment")" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

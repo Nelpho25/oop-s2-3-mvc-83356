@@ -1,0 +1,144 @@
+@model EditUserViewModel
+
+@{
+    ViewData["Title"] = "Edit User Account";
+}
+
+<div class="container-fluid py-4">
+    <div class="row mb-4">
+        <div class="col">
+            <h1 class="h3">
+                <i class="bi bi-pencil-square me-2"></i>Edit Account: @Model.Email
+            </h1>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <form method="post" class="card shadow-sm">
+                @Html.AntiForgeryToken()
+
+                <div class="card-body">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label fw-bold">Email Address</label>
+                                <input type="email" class="form-control" value="@Model.Email" disabled>
+                                <small class="text-muted">Email cannot be changed</small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label fw-bold">Created Date</label>
+                                <input type="text" class="form-control" value="@Model.CreatedAt.ToString("dd MMM yyyy HH:mm")" disabled>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <label asp-for="DisplayName" class="form-label fw-bold">Display Name</label>
+                        <input asp-for="DisplayName" type="text" class="form-control" />
+                        <span asp-validation-for="DisplayName" class="text-danger small"></span>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="form-label fw-bold">Current Role</label>
+                                <input type="text" class="form-control" value="@Model.CurrentRole" disabled>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label asp-for="NewRole" class="form-label fw-bold">Change Role To</label>
+                                <select asp-for="NewRole" class="form-select">
+                                    <option value="">-- Select Role --</option>
+                                    @foreach (var role in Model.AvailableRoles)
+                                    {
+                                        <option value="@role" selected="@(role == Model.CurrentRole)">@role</option>
+                                    }
+                                </select>
+                                <span asp-validation-for="NewRole" class="text-danger small d-block mt-1"></span>
+                                <small class="text-muted d-block mt-2">
+                                    Changing role will create/remove associated profile
+                                </small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group mb-4">
+                        <div class="form-check form-switch">
+                            <input class="form-check-input" type="checkbox" asp-for="IsLocked" id="isLockedCheck">
+                            <label class="form-check-label" for="isLockedCheck">
+                                <strong>Lock Account</strong>
+                                <small class="text-muted d-block">
+                                    Locked accounts cannot log in
+                                </small>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="alert alert-warning">
+                        <i class="bi bi-exclamation-triangle me-2"></i>
+                        <strong>Caution:</strong> Changing the user's role will automatically create or remove their profile data. Ensure you have backups if needed.
+                    </div>
+                </div>
+
+                <div class="card-footer bg-light">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="bi bi-check-circle me-2"></i>Save Changes
+                    </button>
+                    <a href="@Url.Action("Index")" class="btn btn-secondary">
+                        <i class="bi bi-x-circle me-2"></i>Cancel
+                    </a>
+                </div>
+            </form>
+        </div>
+
+        <div class="col-md-4">
+            <div class="card shadow-sm bg-light">
+                <div class="card-header bg-light border-bottom">
+                    <h5 class="mb-0">
+                        <i class="bi bi-info-circle me-2"></i>Role Information
+                    </h5>
+                </div>
+                <div class="card-body">
+                    @switch (Model.CurrentRole)
+                    {
+                        case "Admin":
+                            <p><strong>Administrator</strong></p>
+                            <ul class="small">
+                                <li>Full system access</li>
+                                <li>User account management</li>
+                                <li>Course and enrollment management</li>
+                                <li>System configuration</li>
+                            </ul>
+                            break;
+                        case "Faculty":
+                            <p><strong>Faculty Member</strong></p>
+                            <ul class="small">
+                                <li>Teach assigned courses</li>
+                                <li>Grade assignments and exams</li>
+                                <li>Mark attendance</li>
+                                <li>View student performance</li>
+                            </ul>
+                            break;
+                        case "Student":
+                            <p><strong>Student</strong></p>
+                            <ul class="small">
+                                <li>View enrolled courses</li>
+                                <li>Submit assignments</li>
+                                <li>View grades and attendance</li>
+                                <li>Access course materials</li>
+                            </ul>
+                            break;
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
