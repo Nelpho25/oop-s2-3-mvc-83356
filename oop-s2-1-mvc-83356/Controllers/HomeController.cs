@@ -90,7 +90,7 @@ public class HomeController : Controller
                 FirstName = sg.Student.FirstName,
                 LastName = sg.Student.LastName,
                 StudentNumber = sg.Student.StudentNumber,
-                AverageGrade = sg.AverageGrade > 0 ? Math.Round(sg.AverageGrade, 1) : 0,
+                AverageGrade = (sg.AverageGrade ?? 0) > 0 ? Math.Round(sg.AverageGrade ?? 0, 1) : 0,
                 CoursesCount = sg.CoursesCount
             }).ToList();
 
