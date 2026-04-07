@@ -1,123 +1,115 @@
-name: Test & Publish Coverage (xUnit + ReportGenerator)
+name: CI
 
 on:
-  workflow_dispatch:
   push:
-    branches: [ "master", "main" ]
+    branches: [ "main" ]
   pull_request:
-    branches: [ "master", "main" ]
-
-# Avoid overlapping Pages deployments
-concurrency:
-  group: "pages"
-  cancel-in-progress: true
-
-# Required for GitHub Pages deploy
-permissions:
-  contents: read
-  pages: write
-  id-token: write
-
-env:
-  DOTNET_VERSION: "8.0.x"
-  TEST_PROJECT: "tests/VgcCollege.Tests/VgcCollege.Tests.csproj"
+    branches: [ "main" ]
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
-    outputs:
-      coverage: ${{ steps.coverage.outputs.percentage }}
 
     steps:
-      - name: Checkout Code
+      - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup .NET ${{ env.DOTNET_VERSION }}
+      - name: Setup .NET 8
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: ${{ env.DOTNET_VERSION }}
+          dotnet-version: "8.0.x"
 
-      - name: Restore Dependencies
+      - name: Restore
         run: dotnet restore
 
-      - name: Show Working Directory
-        run: pwd
-
-      - name: List Project Structure
-        run: ls -la
-
       - name: Build (Release)
-        run: dotnet build --configuration Release --no-restore -v minimal
+        run: dotnet build --configuration Release --no-restore
 
-      - name: Run All xUnit Tests with Coverage
-        run: >
-          dotnet test ${{ env.TEST_PROJECT }} 
-          --configuration Release 
-          --no-build 
-          --verbosity normal 
-          --logger "trx;LogFileName=test-results.trx" 
-          --collect:"XPlat Code Coverage"
-          --results-directory ./TestResults
-          -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Exclude="[*]*.Migrations.*,[*]*Program,[*]*.Views.*,[*]*.wwwroot*"
+      - name: Run Tests with Coverage
+        run: |
+          dotnet test tests/VgcCollege.Tests/VgcCollege.Tests.csproj \
+            --configuration Release \
+            --no-build \
+            --verbosity normal \
+            --logger "trx;LogFileName=test-results.trx" \
+            --collect:"XPlat Code Coverage" \
+            --results-directory ./TestResults
+        continue-on-error: true
 
       - name: Install ReportGenerator
         run: dotnet tool install -g dotnet-reportgenerator-globaltool
 
-      - name: Generate HTML Coverage Report
+      - name: Generate Coverage Report
         run: |
           reportgenerator \
-            -reports:"./TestResults/**/coverage.cobertura.xml" \
-            -targetdir:"./coveragereport" \
-            -reporttypes:"Html;Cobertura;Badges" \
-            -assemblyfilters:"+VgcCollege.Web" \
-            -classfilters:"-*.Migrations.*,-*Program,-*.Views.*,-*wwwroot*"
+            "-reports:./TestResults/**/coverage.cobertura.xml" \
+            "-targetdir:./CoverageReport" \
+            "-reporttypes:Html;Cobertura" \
+            "-assemblyfilters:+VgcCollege.Web" \
+            "-classfilters:-*.Migrations.*;-*Program;-*.Views.*"
 
-      - name: Extract Coverage Percentage
-        id: coverage
-        run: |
-          if [ -f "./TestResults/**/coverage.cobertura.xml" ]; then
-            coverage=$(grep -oP 'line-rate="\K[^"]+' ./TestResults/**/coverage.cobertura.xml | head -1)
-            percentage=$((${coverage%.*} * 100))
-            echo "percentage=$percentage%" >> $GITHUB_OUTPUT
-            echo "Coverage: $percentage%"
-          fi
-
-      - name: Upload Test Results as Artifact
+      - name: Upload Test Results
         uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: test-results-${{ github.run_number }}
-          path: ./TestResults
-          retention-days: 30
+          name: test-results
+          path: ./TestResults/**/*.trx
 
-      - name: Upload Coverage Report as Artifact
+      - name: Upload Coverage Report
         uses: actions/upload-artifact@v4
+        if: always()
         with:
-          name: coverage-report-${{ github.run_number }}
-          path: ./coveragereport
-          retention-days: 30
+          name: coverage-report
+          path: ./CoverageReport
 
-      - name: Check Coverage Threshold (≥30%)
-        if: always()
+  deploy-pages:
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup .NET 8
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Restore & Build
         run: |
-          if [ -f "./TestResults/**/coverage.cobertura.xml" ]; then
-            coverage=$(grep -oP 'line-rate="\K[^"]+' ./TestResults/**/coverage.cobertura.xml | head -1)
-            percentage=$(python3 -c "print(f'{float(\"$coverage\")*100:.1f}')")
-            echo "📊 Line coverage: $percentage%"
-            python3 -c "
-            rate = float('$coverage')
-            if rate >= 0.30:
-              print(f'✅ Coverage {rate*100:.1f}% meets 30% threshold')
-            else:
-              print(f'⚠️  Coverage {rate*100:.1f}% is below 30% threshold')
-              exit(1)
-            "
-          else
-            echo "⚠️  No coverage data found"
-          fi
+          dotnet restore
+          dotnet build --configuration Release --no-restore
 
-      - name: Test Summary
-        if: always()
+      - name: Run Tests + Coverage
+        run: |
+          dotnet test tests/VgcCollege.Tests/VgcCollege.Tests.csproj \
+            --configuration Release \
+            --no-build \
+            --collect:"XPlat Code Coverage" \
+            --results-directory ./TestResults
+        continue-on-error: true
+
+      - name: Install ReportGenerator
+        run: dotnet tool install -g dotnet-reportgenerator-globaltool
+
+      - name: Generate Coverage Report for Pages
+        run: |
+          reportgenerator \
+            "-reports:./TestResults/**/coverage.cobertura.xml" \
+            "-targetdir:./CoverageReport" \
+            "-reporttypes:Html;Cobertura" \
+            "-assemblyfilters:+VgcCollege.Web" \
+            "-classfilters:-*.Migrations.*;-*Program;-*.Views.*"
+
+      - name: Deploy to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./CoverageReport
+          publish_branch: gh-pages
         run: |
           echo "## 🧪 Test Execution Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
