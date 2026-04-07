@@ -45,7 +45,7 @@ jobs:
             "-reports:./TestResults/**/coverage.cobertura.xml" \
             "-targetdir:./CoverageReport" \
             "-reporttypes:Html;Cobertura" \
-            "-assemblyfilters:+VgcCollege.Web" \
+            "-assemblyfilters:+oop_s2_1_mvc_83356" \
             "-classfilters:-*.Migrations.*;-*Program;-*.Views.*"
 
       - name: Upload Test Results
@@ -101,7 +101,7 @@ jobs:
             "-reports:./TestResults/**/coverage.cobertura.xml" \
             "-targetdir:./CoverageReport" \
             "-reporttypes:Html;Cobertura" \
-            "-assemblyfilters:+VgcCollege.Web" \
+            "-assemblyfilters:+oop_s2_1_mvc_83356" \
             "-classfilters:-*.Migrations.*;-*Program;-*.Views.*"
 
       - name: Deploy to GitHub Pages
@@ -109,29 +109,7 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./CoverageReport
-          publish_branch: gh-pages
-        run: |
-          echo "## 🧪 Test Execution Summary" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          echo "- **Test Project**: VgcCollege.Tests" >> $GITHUB_STEP_SUMMARY
-          echo "- **Framework**: xUnit" >> $GITHUB_STEP_SUMMARY
-          echo "- **Coverage Tool**: Coverlet" >> $GITHUB_STEP_SUMMARY
-          echo "- **Report Tool**: ReportGenerator" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          if [ -f "./TestResults/**/coverage.cobertura.xml" ]; then
-            coverage=$(grep -oP 'line-rate="\K[^"]+' ./TestResults/**/coverage.cobertura.xml | head -1)
-            percentage=$(python3 -c "print(f'{float(\"$coverage\")*100:.1f}')")
-            echo "- **Code Coverage**: $percentage%" >> $GITHUB_STEP_SUMMARY
-          fi
-          echo "- **Artifacts**: Available for download" >> $GITHUB_STEP_SUMMARY
-
-  upload-pages:
-    # Only upload to Pages when pushing to master
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main')
-    needs: build-and-test
-    runs-on: ubuntu-latest
-
-    steps:
+          publish_branch: gh-pages    steps:
       - name: Download Coverage Report
         uses: actions/download-artifact@v4
         with:
