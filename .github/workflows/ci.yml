@@ -1,10 +1,10 @@
-name: Test & Publish Coverage (xUnit + ReportGenerator)
+name: Test & Publish Coverage
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "master" ]
   pull_request:
-    branches: [ "main" ]
+    branches: [ "main", "master" ]
 
 jobs:
   build-and-test:
@@ -47,7 +47,10 @@ jobs:
             -assemblyfilters:"+oop_s2_1_mvc_83356" \
             -classfilters:"-*.Migrations.*,-*Program,-*.Views.*"
 
-      - name: Upload Test Results as Artifact
+      - name: Verify Coverage Report Generated
+        run: ls -la ./coveragereport/
+
+      - name: Upload Test Results
         uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -55,33 +58,17 @@ jobs:
           path: ./TestResults
           retention-days: 30
 
-      - name: Upload Coverage Report as Artifact
+      - name: Upload Coverage Report
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report
           path: ./coveragereport
           retention-days: 30
-      - name: Download Coverage Report
-        uses: actions/download-artifact@v4
+
+      - name: Deploy to GitHub Pages
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        uses: peaceiris/actions-gh-pages@v3
         with:
-          name: coverage-report-${{ github.run_number }}
-          path: ./coveragereport
-
-      - name: Upload Pages Artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: ./coveragereport
-
-  deploy:
-    # Only deploy to Pages when pushing to master
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main')
-    needs: upload-pages
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
-      - name: Deploy Coverage Report to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./coveragereport
+          cname: false
