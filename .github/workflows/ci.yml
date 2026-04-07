@@ -1,4 +1,4 @@
-name: CI
+name: Test & Publish Coverage (xUnit + ReportGenerator)
 
 on:
   push:
@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout Code
         uses: actions/checkout@v4
 
       - name: Setup .NET 8
@@ -19,97 +19,48 @@ jobs:
         with:
           dotnet-version: "8.0.x"
 
-      - name: Restore
+      - name: Restore Dependencies
         run: dotnet restore
 
       - name: Build (Release)
         run: dotnet build --configuration Release --no-restore
 
-      - name: Run Tests with Coverage
-        run: |
-          dotnet test tests/VgcCollege.Tests/VgcCollege.Tests.csproj \
-            --configuration Release \
-            --no-build \
-            --verbosity normal \
-            --logger "trx;LogFileName=test-results.trx" \
-            --collect:"XPlat Code Coverage" \
-            --results-directory ./TestResults
-        continue-on-error: true
+      - name: Run All xUnit Tests with Coverage
+        run: >
+          dotnet test tests/VgcCollege.Tests/VgcCollege.Tests.csproj 
+          --configuration Release 
+          --no-build 
+          --verbosity normal 
+          --logger "trx;LogFileName=test-results.trx" 
+          --collect:"XPlat Code Coverage"
+          --results-directory ./TestResults
 
       - name: Install ReportGenerator
         run: dotnet tool install -g dotnet-reportgenerator-globaltool
 
-      - name: Generate Coverage Report
+      - name: Generate HTML Coverage Report
         run: |
           reportgenerator \
-            "-reports:./TestResults/**/coverage.cobertura.xml" \
-            "-targetdir:./CoverageReport" \
-            "-reporttypes:Html;Cobertura" \
-            "-assemblyfilters:+oop_s2_1_mvc_83356" \
-            "-classfilters:-*.Migrations.*;-*Program;-*.Views.*"
+            -reports:"./TestResults/**/coverage.cobertura.xml" \
+            -targetdir:"./coveragereport" \
+            -reporttypes:"Html;Cobertura" \
+            -assemblyfilters:"+oop_s2_1_mvc_83356" \
+            -classfilters:"-*.Migrations.*,-*Program,-*.Views.*"
 
-      - name: Upload Test Results
+      - name: Upload Test Results as Artifact
         uses: actions/upload-artifact@v4
         if: always()
         with:
           name: test-results
-          path: ./TestResults/**/*.trx
+          path: ./TestResults
+          retention-days: 30
 
-      - name: Upload Coverage Report
+      - name: Upload Coverage Report as Artifact
         uses: actions/upload-artifact@v4
-        if: always()
         with:
           name: coverage-report
-          path: ./CoverageReport
-
-  deploy-pages:
-    needs: build-and-test
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-    permissions:
-      contents: write
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup .NET 8
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: "8.0.x"
-
-      - name: Restore & Build
-        run: |
-          dotnet restore
-          dotnet build --configuration Release --no-restore
-
-      - name: Run Tests + Coverage
-        run: |
-          dotnet test tests/VgcCollege.Tests/VgcCollege.Tests.csproj \
-            --configuration Release \
-            --no-build \
-            --collect:"XPlat Code Coverage" \
-            --results-directory ./TestResults
-        continue-on-error: true
-
-      - name: Install ReportGenerator
-        run: dotnet tool install -g dotnet-reportgenerator-globaltool
-
-      - name: Generate Coverage Report for Pages
-        run: |
-          reportgenerator \
-            "-reports:./TestResults/**/coverage.cobertura.xml" \
-            "-targetdir:./CoverageReport" \
-            "-reporttypes:Html;Cobertura" \
-            "-assemblyfilters:+oop_s2_1_mvc_83356" \
-            "-classfilters:-*.Migrations.*;-*Program;-*.Views.*"
-
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./CoverageReport
-          publish_branch: gh-pages    steps:
+          path: ./coveragereport
+          retention-days: 30
       - name: Download Coverage Report
         uses: actions/download-artifact@v4
         with:
