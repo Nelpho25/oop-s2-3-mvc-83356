@@ -1,0 +1,54 @@
+@model AttendanceCourseViewModel
+@{
+    ViewData["Title"] = "Manage Course Attendance";
+}
+
+<div class="container-fluid mt-4">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1 class="mb-0">Manage Attendance</h1>
+        </div>
+        <div class="col-md-4 text-end">
+            <a asp-action="Index" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Back
+            </a>
+        </div>
+    </div>
+
+    @if (!Model.Enrolments.Any())
+    {
+        <div class="alert alert-info" role="alert">
+            <i class="bi bi-info-circle"></i> No students enrolled in this course.
+        </div>
+    }
+    else
+    {
+        <div class="card">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Student Number</th>
+                            <th>Student Name</th>
+                            <th class="text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var enrolment in Model.Enrolments)
+                        {
+                            <tr>
+                                <td>@enrolment.StudentProfile?.StudentNumber</td>
+                                <td>@enrolment.StudentProfile?.FirstName @enrolment.StudentProfile?.LastName</td>
+                                <td class="text-center">
+                                    <a asp-action="Enrolment" asp-route-enrolmentId="@enrolment.Id" class="btn btn-sm btn-primary" title="View Attendance Records">
+                                        <i class="bi bi-calendar-check"></i> View Attendance
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+</div>

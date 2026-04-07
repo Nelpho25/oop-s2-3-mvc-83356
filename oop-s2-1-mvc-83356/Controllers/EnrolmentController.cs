@@ -71,9 +71,11 @@ public class EnrolmentController : BaseController
                     FirstName = s.FirstName,
                     LastName = s.LastName
                 })
+                .OrderBy(s => s.StudentNumber)
                 .ToListAsync();
 
             var courses = await _context.Courses
+                .Include(c => c.Branch)
                 .Select(c => new CourseBasicViewModel
                 {
                     Id = c.Id,
@@ -81,6 +83,7 @@ public class EnrolmentController : BaseController
                     StartDate = c.StartDate,
                     EndDate = c.EndDate
                 })
+                .OrderBy(c => c.Name)
                 .ToListAsync();
 
             var model = new EnrolmentCreateEditViewModel
@@ -117,6 +120,7 @@ public class EnrolmentController : BaseController
                         FirstName = s.FirstName,
                         LastName = s.LastName
                     })
+                    .OrderBy(s => s.StudentNumber)
                     .ToListAsync();
 
                 model.Courses = await _context.Courses
@@ -127,6 +131,69 @@ public class EnrolmentController : BaseController
                         StartDate = c.StartDate,
                         EndDate = c.EndDate
                     })
+                    .OrderBy(c => c.Name)
+                    .ToListAsync();
+
+                return View("CreateEdit", model);
+            }
+
+            // Validate student exists
+            var student = await _context.StudentProfiles.FindAsync(model.StudentProfileId);
+            if (student == null)
+            {
+                _logger.LogWarning("Enrolment attempted for non-existent student {StudentId}", model.StudentProfileId);
+                ModelState.AddModelError("StudentProfileId", "The selected student does not exist.");
+                model.Students = await _context.StudentProfiles
+                    .Select(s => new StudentBasicViewModel
+                    {
+                        Id = s.Id,
+                        StudentNumber = s.StudentNumber,
+                        FirstName = s.FirstName,
+                        LastName = s.LastName
+                    })
+                    .OrderBy(s => s.StudentNumber)
+                    .ToListAsync();
+
+                model.Courses = await _context.Courses
+                    .Select(c => new CourseBasicViewModel
+                    {
+                        Id = c.Id,
+                        Name = c.Name,
+                        StartDate = c.StartDate,
+                        EndDate = c.EndDate
+                    })
+                    .OrderBy(c => c.Name)
+                    .ToListAsync();
+
+                return View("CreateEdit", model);
+            }
+
+            // Validate course exists and get course details
+            var course = await _context.Courses.Include(c => c.Branch).FirstOrDefaultAsync(c => c.Id == model.CourseId);
+            if (course == null)
+            {
+                _logger.LogWarning("Enrolment attempted for non-existent course {CourseId}", model.CourseId);
+                ModelState.AddModelError("CourseId", "The selected course does not exist.");
+                model.Students = await _context.StudentProfiles
+                    .Select(s => new StudentBasicViewModel
+                    {
+                        Id = s.Id,
+                        StudentNumber = s.StudentNumber,
+                        FirstName = s.FirstName,
+                        LastName = s.LastName
+                    })
+                    .OrderBy(s => s.StudentNumber)
+                    .ToListAsync();
+
+                model.Courses = await _context.Courses
+                    .Select(c => new CourseBasicViewModel
+                    {
+                        Id = c.Id,
+                        Name = c.Name,
+                        StartDate = c.StartDate,
+                        EndDate = c.EndDate
+                    })
+                    .OrderBy(c => c.Name)
                     .ToListAsync();
 
                 return View("CreateEdit", model);
@@ -139,7 +206,7 @@ public class EnrolmentController : BaseController
             if (existing != null)
             {
                 _logger.LogWarning("Duplicate enrolment attempted for student {StudentId} in course {CourseId}", model.StudentProfileId, model.CourseId);
-                ModelState.AddModelError("", "Student is already enrolled in this course.");
+                ModelState.AddModelError("", $"Student {student.FirstName} {student.LastName} is already enrolled in {course.Name}.");
                 model.Students = await _context.StudentProfiles
                     .Select(s => new StudentBasicViewModel
                     {
@@ -148,6 +215,7 @@ public class EnrolmentController : BaseController
                         FirstName = s.FirstName,
                         LastName = s.LastName
                     })
+                    .OrderBy(s => s.StudentNumber)
                     .ToListAsync();
 
                 model.Courses = await _context.Courses
@@ -158,6 +226,37 @@ public class EnrolmentController : BaseController
                         StartDate = c.StartDate,
                         EndDate = c.EndDate
                     })
+                    .OrderBy(c => c.Name)
+                    .ToListAsync();
+
+                return View("CreateEdit", model);
+            }
+
+            // Check if enrolment date is valid (within course dates if specified)
+            if (course.StartDate.HasValue && model.EnrolmentDate.HasValue && model.EnrolmentDate.Value < course.StartDate.Value)
+            {
+                _logger.LogWarning("Enrolment attempted with date before course start for student {StudentId} in course {CourseId}", model.StudentProfileId, model.CourseId);
+                ModelState.AddModelError("EnrolmentDate", $"Enrolment date cannot be before course start date ({course.StartDate:MMM dd, yyyy}).");
+                model.Students = await _context.StudentProfiles
+                    .Select(s => new StudentBasicViewModel
+                    {
+                        Id = s.Id,
+                        StudentNumber = s.StudentNumber,
+                        FirstName = s.FirstName,
+                        LastName = s.LastName
+                    })
+                    .OrderBy(s => s.StudentNumber)
+                    .ToListAsync();
+
+                model.Courses = await _context.Courses
+                    .Select(c => new CourseBasicViewModel
+                    {
+                        Id = c.Id,
+                        Name = c.Name,
+                        StartDate = c.StartDate,
+                        EndDate = c.EndDate
+                    })
+                    .OrderBy(c => c.Name)
                     .ToListAsync();
 
                 return View("CreateEdit", model);
@@ -176,16 +275,16 @@ public class EnrolmentController : BaseController
             _context.CourseEnrolments.Add(enrolment);
             await _context.SaveChangesAsync();
 
-            _logger.LogInformation("Enrolment created: Student {StudentId} enrolled in course {CourseId} by {User}", model.StudentProfileId, model.CourseId, User.Identity?.Name);
-            TempData["Success"] = "Enrolment created successfully.";
+            _logger.LogInformation("Enrolment created: Student {StudentId} ({StudentName}) enrolled in course {CourseId} ({CourseName}) by {User}", model.StudentProfileId, $"{student.FirstName} {student.LastName}", model.CourseId, course.Name, User.Identity?.Name);
+            TempData["Success"] = $"Enrolment created successfully. Student {student.FirstName} {student.LastName} has been enrolled in {course.Name}.";
             return RedirectToAction("Index");
         }
         catch (DbUpdateException ex)
         {
             _logger.LogError(ex, "Database error creating enrolment for student {StudentId}", model.StudentProfileId);
             TempData["Error"] = "An error occurred while creating the enrolment. Please try again.";
-            model.Students = await _context.StudentProfiles.Select(s => new StudentBasicViewModel { Id = s.Id, StudentNumber = s.StudentNumber, FirstName = s.FirstName, LastName = s.LastName }).ToListAsync();
-            model.Courses = await _context.Courses.Select(c => new CourseBasicViewModel { Id = c.Id, Name = c.Name, StartDate = c.StartDate, EndDate = c.EndDate }).ToListAsync();
+            model.Students = await _context.StudentProfiles.Select(s => new StudentBasicViewModel { Id = s.Id, StudentNumber = s.StudentNumber, FirstName = s.FirstName, LastName = s.LastName }).OrderBy(s => s.StudentNumber).ToListAsync();
+            model.Courses = await _context.Courses.Select(c => new CourseBasicViewModel { Id = c.Id, Name = c.Name, StartDate = c.StartDate, EndDate = c.EndDate }).OrderBy(c => c.Name).ToListAsync();
             return View("CreateEdit", model);
         }
         catch (Exception ex)

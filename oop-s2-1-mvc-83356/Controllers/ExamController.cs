@@ -50,6 +50,34 @@ public class ExamController : BaseController
         }
     }
 
+    [HttpGet("{id}/Results")]
+    public async Task<IActionResult> Results(int id)
+    {
+        try
+        {
+            var exam = await _context.Exams
+                .Include(e => e.Course)
+                .Include(e => e.ExamResults)
+                    .ThenInclude(er => er.StudentProfile)
+                .FirstOrDefaultAsync(e => e.Id == id);
+
+            if (exam == null)
+            {
+                _logger.LogWarning("Results requested for non-existent exam {ExamId}", id);
+                return NotFound();
+            }
+
+            _logger.LogInformation("Exam results retrieved for exam {ExamId} ({ExamTitle}). Total results: {ResultCount}", id, exam.Title, exam.ExamResults.Count);
+            return View(exam);
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, "Error retrieving exam results for exam {ExamId}", id);
+            TempData["Error"] = "An error occurred while retrieving exam results.";
+            return RedirectToAction("Index");
+        }
+    }
+
     [HttpPost("{id}/ToggleResultsRelease")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> ToggleResultsRelease(int id)

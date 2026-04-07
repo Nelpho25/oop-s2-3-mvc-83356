@@ -1,0 +1,117 @@
+@model GradebookViewModel
+@{
+    ViewData["Title"] = $"Gradebook - {Model.Course?.Name}";
+}
+
+<div class="container-fluid mt-4">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1 class="mb-0">@Model.Course?.Name - Gradebook</h1>
+            <small class="text-muted">@Model.Course?.Branch?.Name</small>
+        </div>
+        <div class="col-md-4 text-end">
+            <a href="@Url.Action("Courses", "Gradebook")" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Back to Courses
+            </a>
+            <a href="@Url.Action("ExamResults", "Gradebook", new { courseId = Model.Course?.Id })" class="btn btn-info">
+                <i class="bi bi-file-earmark"></i> Exam Results
+            </a>
+        </div>
+    </div>
+
+    @if (!Model.Enrolments.Any())
+    {
+        <div class="alert alert-info" role="alert">
+            <i class="bi bi-info-circle"></i> No students enrolled in this course.
+        </div>
+    }
+    else
+    {
+        <div class="card">
+            <div class="card-header">
+                <h5 class="mb-0">Student Grades</h5>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Student Number</th>
+                            <th>Student Name</th>
+                            <th class="text-center">Assignments</th>
+                            <th class="text-center">Average Grade</th>
+                            <th class="text-center" style="width: 100px;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var enrolment in Model.Enrolments.OrderBy(e => e.StudentProfile?.LastName))
+                        {
+                            <tr>
+                                <td>@enrolment.StudentProfile?.StudentNumber</td>
+                                <td>@enrolment.StudentProfile?.FirstName @enrolment.StudentProfile?.LastName</td>
+                                <td class="text-center">
+                                    <span class="badge bg-info">
+                                        @(Model.Course?.Assignments?.Count ?? 0)
+                                    </span>
+                                </td>
+                                <td class="text-center">
+                                    <span class="badge bg-success">N/A</span>
+                                </td>
+                                <td class="text-center">
+                                    <a href="@Url.Action("Assignment", "Gradebook", new { assignmentId = Model.Course?.Assignments?.FirstOrDefault()?.Id })" 
+                                       class="btn btn-sm btn-primary" 
+                                       title="View Assignment Grades">
+                                        <i class="bi bi-eye"></i> View
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        @if (Model.Course?.Assignments?.Any() == true)
+        {
+            <div class="card mt-4">
+                <div class="card-header">
+                    <h5 class="mb-0">Assignments</h5>
+                </div>
+                <div class="table-responsive">
+                    <table class="table table-hover mb-0">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Assignment Name</th>
+                                <th>Due Date</th>
+                                <th class="text-center">Max Score</th>
+                                <th class="text-center">Submissions</th>
+                                <th class="text-center" style="width: 100px;">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var assignment in Model.Course.Assignments)
+                            {
+                                <tr>
+                                    <td>@assignment.Title</td>
+                                    <td>@(assignment.DueDate?.ToString("MMM dd, yyyy") ?? "N/A")</td>
+                                    <td class="text-center">@assignment.MaxScore</td>
+                                    <td class="text-center">
+                                        <span class="badge bg-info">
+                                            @(assignment.AssignmentResults?.Count ?? 0)
+                                        </span>
+                                    </td>
+                                    <td class="text-center">
+                                        <a href="@Url.Action("Assignment", "Gradebook", new { assignmentId = assignment.Id })" 
+                                           class="btn btn-sm btn-primary" 
+                                           title="View Assignment Details">
+                                            <i class="bi bi-eye"></i> View
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        }
+    }
+</div>

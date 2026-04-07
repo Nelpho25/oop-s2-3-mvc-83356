@@ -1,0 +1,97 @@
+@model AttendanceEnrolmentViewModel
+@{
+    ViewData["Title"] = "Student Attendance";
+}
+
+<div class="container-fluid mt-4">
+    <div class="row mb-4">
+        <div class="col-md-8">
+            <h1 class="mb-0">
+                @Model.Enrolment.StudentProfile?.FirstName @Model.Enrolment.StudentProfile?.LastName - @Model.Enrolment.Course?.Name
+            </h1>
+            <p class="text-muted">Student Number: @Model.Enrolment.StudentProfile?.StudentNumber</p>
+        </div>
+        <div class="col-md-4 text-end">
+            <a asp-action="Course" asp-route-courseId="@Model.Enrolment.CourseId" class="btn btn-secondary">
+                <i class="bi bi-arrow-left"></i> Back
+            </a>
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h5 class="mb-0">Attendance Summary</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p><strong>Attendance Rate:</strong></p>
+                            <div class="progress" style="height: 30px;">
+                                <div class="progress-bar @(Model.AttendanceRate >= 80 ? "bg-success" : Model.AttendanceRate >= 70 ? "bg-warning" : "bg-danger")" 
+                                     role="progressbar" 
+                                     style="width: @Model.AttendanceRate%;" 
+                                     aria-valuenow="@Model.AttendanceRate" 
+                                     aria-valuemin="0" 
+                                     aria-valuemax="100">
+                                    @Model.AttendanceRate.ToString("F1")%
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <p><strong>Total Sessions:</strong> @Model.Enrolment.AttendanceRecords.Count()</p>
+                            <p><strong>Sessions Attended:</strong> @Model.Enrolment.AttendanceRecords.Count(ar => ar.IsPresent)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-12">
+            @if (!Model.Enrolment.AttendanceRecords.Any())
+            {
+                <div class="alert alert-info" role="alert">
+                    <i class="bi bi-info-circle"></i> No attendance records yet.
+                </div>
+            }
+            else
+            {
+                <div class="card">
+                    <div class="table-responsive">
+                        <table class="table table-hover mb-0">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>Session Date</th>
+                                    <th class="text-center">Status</th>
+                                    <th>Notes</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var record in Model.Enrolment.AttendanceRecords.OrderByDescending(ar => ar.SessionDate))
+                                {
+                                    <tr>
+                                        <td>@record.SessionDate.ToString("MMM dd, yyyy")</td>
+                                        <td class="text-center">
+                                            @if (record.IsPresent)
+                                            {
+                                                <span class="badge bg-success"><i class="bi bi-check-circle"></i> Present</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="badge bg-danger"><i class="bi bi-x-circle"></i> Absent</span>
+                                            }
+                                        </td>
+                                        <td>@record.Notes</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
