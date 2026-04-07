@@ -47,7 +47,6 @@ jobs:
             -reports:"./TestResults/**/coverage.cobertura.xml" \
             -targetdir:"./coveragereport" \
             -reporttypes:"Html;Cobertura" \
-            -assemblyfilters:"+oop_s2_1_mvc_83356" \
             -classfilters:"-*.Migrations.*,-*Program,-*.Views.*"
 
       - name: Verify Coverage Report Generated
