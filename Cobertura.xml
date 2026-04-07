@@ -1,0 +1,1641 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
+<coverage line-rate="0.5845070422535211" branch-rate="0.21212121212121213" lines-covered="249" lines-valid="426" branches-covered="14" branches-valid="66" complexity="140" version="0" timestamp="1775563472">
+  <sources>
+    <source>/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/</source>
+  </sources>
+  <packages>
+    <package name="oop-s2-1-mvc-83356" line-rate="0.5845070422535211" branch-rate="0.21212121212121213" complexity="140">
+      <classes>
+        <class name="AspNetCoreGeneratedDocument.Views_AccountManagement_Delete" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Views/AccountManagement/Delete.cshtml" line-rate="0" branch-rate="0" complexity="6">
+          <methods>
+            <method name="GetRoleBadgeColor" signature="(System.String)" line-rate="0" branch-rate="0" complexity="6">
+              <lines>
+                <line number="118" hits="0" branch="true" condition-coverage="0% (0/6)" />
+                <line number="119" hits="0" branch="false" />
+                <line number="120" hits="0" branch="false" />
+                <line number="121" hits="0" branch="false" />
+                <line number="122" hits="0" branch="false" />
+                <line number="123" hits="0" branch="false" />
+                <line number="124" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="118" hits="0" branch="true" condition-coverage="0% (0/6)" />
+            <line number="119" hits="0" branch="false" />
+            <line number="120" hits="0" branch="false" />
+            <line number="121" hits="0" branch="false" />
+            <line number="122" hits="0" branch="false" />
+            <line number="123" hits="0" branch="false" />
+            <line number="124" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="AspNetCoreGeneratedDocument.Views_AccountManagement_Index" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Views/AccountManagement/Index.cshtml" line-rate="0" branch-rate="0" complexity="6">
+          <methods>
+            <method name="GetRoleBadgeColor" signature="(System.String)" line-rate="0" branch-rate="0" complexity="6">
+              <lines>
+                <line number="107" hits="0" branch="true" condition-coverage="0% (0/6)" />
+                <line number="108" hits="0" branch="false" />
+                <line number="109" hits="0" branch="false" />
+                <line number="110" hits="0" branch="false" />
+                <line number="111" hits="0" branch="false" />
+                <line number="112" hits="0" branch="false" />
+                <line number="113" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="107" hits="0" branch="true" condition-coverage="0% (0/6)" />
+            <line number="108" hits="0" branch="false" />
+            <line number="109" hits="0" branch="false" />
+            <line number="110" hits="0" branch="false" />
+            <line number="111" hits="0" branch="false" />
+            <line number="112" hits="0" branch="false" />
+            <line number="113" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="AspNetCoreGeneratedDocument.Views_StudentDashboard_Grades" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Views/StudentDashboard/Grades.cshtml" line-rate="0" branch-rate="0" complexity="10">
+          <methods>
+            <method name="GetGradeBadgeColor" signature="(System.String)" line-rate="0" branch-rate="0" complexity="10">
+              <lines>
+                <line number="120" hits="0" branch="true" condition-coverage="0% (0/10)" />
+                <line number="121" hits="0" branch="false" />
+                <line number="122" hits="0" branch="false" />
+                <line number="123" hits="0" branch="false" />
+                <line number="124" hits="0" branch="false" />
+                <line number="125" hits="0" branch="false" />
+                <line number="126" hits="0" branch="false" />
+                <line number="127" hits="0" branch="false" />
+                <line number="128" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="120" hits="0" branch="true" condition-coverage="0% (0/10)" />
+            <line number="121" hits="0" branch="false" />
+            <line number="122" hits="0" branch="false" />
+            <line number="123" hits="0" branch="false" />
+            <line number="124" hits="0" branch="false" />
+            <line number="125" hits="0" branch="false" />
+            <line number="126" hits="0" branch="false" />
+            <line number="127" hits="0" branch="false" />
+            <line number="128" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Controllers.AccountController" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Controllers/AccountController.cs" line-rate="0" branch-rate="0" complexity="7">
+          <methods>
+            <method name="Lockout" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="77" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name="AccessDenied" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="126" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name="Register" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="133" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name="RedirectToLocal" signature="(System.String)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="187" hits="0" branch="true" condition-coverage="0% (0/2)" />
+                <line number="189" hits="0" branch="false" />
+                <line number="191" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name="GenerateStudentNumber" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="208" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(oop_s2_1_mvc_83356.Data.ApplicationDbContext,Microsoft.AspNetCore.Identity.SignInManager`1&lt;oop_s2_1_mvc_83356.Models.ApplicationUser&gt;,Microsoft.AspNetCore.Identity.UserManager`1&lt;oop_s2_1_mvc_83356.Models.ApplicationUser&gt;,Microsoft.Extensions.Logging.ILogger`1&lt;oop_s2_1_mvc_83356.Controllers.AccountController&gt;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="23" hits="0" branch="false" />
+                <line number="25" hits="0" branch="false" />
+                <line number="26" hits="0" branch="false" />
+                <line number="27" hits="0" branch="false" />
+                <line number="28" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="23" hits="0" branch="false" />
+            <line number="25" hits="0" branch="false" />
+            <line number="26" hits="0" branch="false" />
+            <line number="27" hits="0" branch="false" />
+            <line number="28" hits="0" branch="false" />
+            <line number="77" hits="0" branch="false" />
+            <line number="126" hits="0" branch="false" />
+            <line number="133" hits="0" branch="false" />
+            <line number="187" hits="0" branch="true" condition-coverage="0% (0/2)" />
+            <line number="189" hits="0" branch="false" />
+            <line number="191" hits="0" branch="false" />
+            <line number="208" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Controllers.AccountManagementController" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Controllers/AccountManagementController.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="(oop_s2_1_mvc_83356.Data.ApplicationDbContext,Microsoft.AspNetCore.Identity.UserManager`1&lt;oop_s2_1_mvc_83356.Models.ApplicationUser&gt;,Microsoft.AspNetCore.Identity.RoleManager`1&lt;Microsoft.AspNetCore.Identity.IdentityRole&gt;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="21" hits="0" branch="false" />
+                <line number="23" hits="0" branch="false" />
+                <line number="24" hits="0" branch="false" />
+                <line number="25" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="21" hits="0" branch="false" />
+            <line number="23" hits="0" branch="false" />
+            <line number="24" hits="0" branch="false" />
+            <line number="25" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Controllers.AdminController" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Controllers/AdminController.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="(oop_s2_1_mvc_83356.Data.ApplicationDbContext)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="13" hits="0" branch="false" />
+                <line number="15" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="13" hits="0" branch="false" />
+            <line number="15" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Controllers.Api.DashboardController" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Controllers/Api/DashboardController.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="(oop_s2_1_mvc_83356.Data.ApplicationDbContext)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="14" hits="0" branch="false" />
+                <line number="16" hits="0" branch="false" />
+                <line number="17" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="14" hits="0" branch="false" />
+            <line number="16" hits="0" branch="false" />
+            <line number="17" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Controllers.AttendanceController" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Controllers/AttendanceController.cs" line-rate="0" branch-rate="0" complexity="4">
+          <methods>
+            <method name="CalculateAttendanceRate" signature="(System.Collections.Generic.ICollection`1&lt;oop_s2_1_mvc_83356.Models.AttendanceRecord&gt;)" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="139" hits="0" branch="true" condition-coverage="0% (0/2)" />
+                <line number="140" hits="0" branch="false" />
+                <line number="142" hits="0" branch="false" />
+                <line number="143" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name="GetWeekNumber" signature="(System.DateTime)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="148" hits="0" branch="false" />
+                <line number="149" hits="0" branch="false" />
+                <line number="150" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(oop_s2_1_mvc_83356.Data.ApplicationDbContext)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="13" hits="0" branch="false" />
+                <line number="15" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="13" hits="0" branch="false" />
+            <line number="15" hits="0" branch="false" />
+            <line number="139" hits="0" branch="true" condition-coverage="0% (0/2)" />
+            <line number="140" hits="0" branch="false" />
+            <line number="142" hits="0" branch="false" />
+            <line number="143" hits="0" branch="false" />
+            <line number="148" hits="0" branch="false" />
+            <line number="149" hits="0" branch="false" />
+            <line number="150" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Controllers.AttendanceCourseViewModel" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Controllers/AttendanceController.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="157" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="157" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Controllers.BranchController" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Controllers/BranchController.cs" line-rate="0" branch-rate="1" complexity="2">
+          <methods>
+            <method name="Create" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="92" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(oop_s2_1_mvc_83356.Data.ApplicationDbContext,Microsoft.Extensions.Logging.ILogger`1&lt;oop_s2_1_mvc_83356.Controllers.BranchController&gt;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="16" hits="0" branch="false" />
+                <line number="18" hits="0" branch="false" />
+                <line number="19" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="16" hits="0" branch="false" />
+            <line number="18" hits="0" branch="false" />
+            <line number="19" hits="0" branch="false" />
+            <line number="92" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Controllers.CourseController" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Controllers/CourseController.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="(oop_s2_1_mvc_83356.Data.ApplicationDbContext,Microsoft.Extensions.Logging.ILogger`1&lt;oop_s2_1_mvc_83356.Controllers.CourseController&gt;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="16" hits="0" branch="false" />
+                <line number="18" hits="0" branch="false" />
+                <line number="19" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="16" hits="0" branch="false" />
+            <line number="18" hits="0" branch="false" />
+            <line number="19" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Controllers.DeleteUserViewModel" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Controllers/AccountManagementController.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="323" hits="0" branch="false" />
+                <line number="324" hits="0" branch="false" />
+                <line number="325" hits="0" branch="false" />
+                <line number="326" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="323" hits="0" branch="false" />
+            <line number="324" hits="0" branch="false" />
+            <line number="325" hits="0" branch="false" />
+            <line number="326" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Controllers.EditUserViewModel" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Controllers/AccountManagementController.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="300" hits="0" branch="false" />
+                <line number="301" hits="0" branch="false" />
+                <line number="305" hits="0" branch="false" />
+                <line number="308" hits="0" branch="false" />
+                <line number="312" hits="0" branch="false" />
+                <line number="314" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="300" hits="0" branch="false" />
+            <line number="301" hits="0" branch="false" />
+            <line number="305" hits="0" branch="false" />
+            <line number="308" hits="0" branch="false" />
+            <line number="312" hits="0" branch="false" />
+            <line number="314" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Controllers.EnrolmentController" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Controllers/EnrolmentController.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="(oop_s2_1_mvc_83356.Data.ApplicationDbContext,Microsoft.Extensions.Logging.ILogger`1&lt;oop_s2_1_mvc_83356.Controllers.EnrolmentController&gt;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="16" hits="0" branch="false" />
+                <line number="18" hits="0" branch="false" />
+                <line number="19" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="16" hits="0" branch="false" />
+            <line number="18" hits="0" branch="false" />
+            <line number="19" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Controllers.ErrorViewModel" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Controllers/HomeController.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name="get_ShowRequestId" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="141" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="141" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Controllers.ExamController" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Controllers/ExamController.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="(oop_s2_1_mvc_83356.Data.ApplicationDbContext,Microsoft.Extensions.Logging.ILogger`1&lt;oop_s2_1_mvc_83356.Controllers.ExamController&gt;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="15" hits="0" branch="false" />
+                <line number="17" hits="0" branch="false" />
+                <line number="18" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="15" hits="0" branch="false" />
+            <line number="17" hits="0" branch="false" />
+            <line number="18" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Controllers.ExamResultsViewModel" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Controllers/GradebookController.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="156" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="156" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Controllers.FacultyController" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Controllers/FacultyController.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="(oop_s2_1_mvc_83356.Data.ApplicationDbContext)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="13" hits="0" branch="false" />
+                <line number="15" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="13" hits="0" branch="false" />
+            <line number="15" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Controllers.FacultyDashboardViewModel" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Controllers/FacultyController.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="73" hits="0" branch="false" />
+                <line number="78" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="73" hits="0" branch="false" />
+            <line number="78" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Controllers.GradebookController" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Controllers/GradebookController.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="(oop_s2_1_mvc_83356.Data.ApplicationDbContext)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="13" hits="0" branch="false" />
+                <line number="15" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="13" hits="0" branch="false" />
+            <line number="15" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Controllers.GradebookViewModel" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Controllers/GradebookController.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="150" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="150" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Controllers.HomeController" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Controllers/HomeController.cs" line-rate="0" branch-rate="0" complexity="7">
+          <methods>
+            <method name="Error" signature="(System.Nullable`1&lt;System.Int32&gt;)" line-rate="0" branch-rate="0" complexity="6">
+              <lines>
+                <line number="126" hits="0" branch="false" />
+                <line number="128" hits="0" branch="true" condition-coverage="0% (0/6)" />
+                <line number="129" hits="0" branch="false" />
+                <line number="130" hits="0" branch="false" />
+                <line number="131" hits="0" branch="false" />
+                <line number="132" hits="0" branch="false" />
+                <line number="133" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(Microsoft.Extensions.Logging.ILogger`1&lt;oop_s2_1_mvc_83356.Controllers.HomeController&gt;,oop_s2_1_mvc_83356.Data.ApplicationDbContext)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="14" hits="0" branch="false" />
+                <line number="16" hits="0" branch="false" />
+                <line number="17" hits="0" branch="false" />
+                <line number="18" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="14" hits="0" branch="false" />
+            <line number="16" hits="0" branch="false" />
+            <line number="17" hits="0" branch="false" />
+            <line number="18" hits="0" branch="false" />
+            <line number="126" hits="0" branch="false" />
+            <line number="128" hits="0" branch="true" condition-coverage="0% (0/6)" />
+            <line number="129" hits="0" branch="false" />
+            <line number="130" hits="0" branch="false" />
+            <line number="131" hits="0" branch="false" />
+            <line number="132" hits="0" branch="false" />
+            <line number="133" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Controllers.LoginViewModel" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Controllers/AccountController.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="216" hits="0" branch="false" />
+                <line number="220" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="216" hits="0" branch="false" />
+            <line number="220" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Controllers.ProfileViewModel" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Controllers/AccountController.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="255" hits="0" branch="false" />
+                <line number="256" hits="0" branch="false" />
+                <line number="257" hits="0" branch="false" />
+                <line number="259" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="255" hits="0" branch="false" />
+            <line number="256" hits="0" branch="false" />
+            <line number="257" hits="0" branch="false" />
+            <line number="259" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Controllers.RegisterViewModel" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Controllers/AccountController.cs" line-rate="0" branch-rate="1" complexity="2">
+          <methods>
+            <method name="get_DisplayName" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="250" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="230" hits="0" branch="false" />
+                <line number="234" hits="0" branch="false" />
+                <line number="238" hits="0" branch="false" />
+                <line number="243" hits="0" branch="false" />
+                <line number="247" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="230" hits="0" branch="false" />
+            <line number="234" hits="0" branch="false" />
+            <line number="238" hits="0" branch="false" />
+            <line number="243" hits="0" branch="false" />
+            <line number="247" hits="0" branch="false" />
+            <line number="250" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Controllers.StudentController" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Controllers/StudentController.cs" line-rate="0" branch-rate="1" complexity="2">
+          <methods>
+            <method name="Create" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="152" hits="0" branch="false" />
+                <line number="153" hits="0" branch="false" />
+                <line number="154" hits="0" branch="false" />
+                <line number="155" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(oop_s2_1_mvc_83356.Data.ApplicationDbContext,Microsoft.Extensions.Logging.ILogger`1&lt;oop_s2_1_mvc_83356.Controllers.StudentController&gt;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="16" hits="0" branch="false" />
+                <line number="18" hits="0" branch="false" />
+                <line number="19" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="16" hits="0" branch="false" />
+            <line number="18" hits="0" branch="false" />
+            <line number="19" hits="0" branch="false" />
+            <line number="152" hits="0" branch="false" />
+            <line number="153" hits="0" branch="false" />
+            <line number="154" hits="0" branch="false" />
+            <line number="155" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Controllers.StudentDashboardController" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Controllers/StudentDashboardController.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="(oop_s2_1_mvc_83356.Data.ApplicationDbContext)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="13" hits="0" branch="false" />
+                <line number="15" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="13" hits="0" branch="false" />
+            <line number="15" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Controllers.StudentDashboardViewModel" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Controllers/StudentDashboardController.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="101" hits="0" branch="false" />
+                <line number="102" hits="0" branch="false" />
+                <line number="103" hits="0" branch="false" />
+                <line number="107" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="101" hits="0" branch="false" />
+            <line number="102" hits="0" branch="false" />
+            <line number="103" hits="0" branch="false" />
+            <line number="107" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Controllers.StudentGradesViewModel" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Controllers/StudentDashboardController.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="112" hits="0" branch="false" />
+                <line number="113" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="112" hits="0" branch="false" />
+            <line number="113" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Controllers.UserManagementViewModel" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Controllers/AccountManagementController.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="290" hits="0" branch="false" />
+                <line number="291" hits="0" branch="false" />
+                <line number="292" hits="0" branch="false" />
+                <line number="293" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="290" hits="0" branch="false" />
+            <line number="291" hits="0" branch="false" />
+            <line number="292" hits="0" branch="false" />
+            <line number="293" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Data.ApplicationDbContext" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Data/ApplicationDbContext.cs" line-rate="1" branch-rate="1" complexity="2">
+          <methods>
+            <method name="OnModelCreating" signature="(Microsoft.EntityFrameworkCore.ModelBuilder)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="29" hits="4" branch="false" />
+                <line number="32" hits="4" branch="false" />
+                <line number="33" hits="4" branch="false" />
+                <line number="34" hits="4" branch="false" />
+                <line number="35" hits="4" branch="false" />
+                <line number="37" hits="4" branch="false" />
+                <line number="38" hits="4" branch="false" />
+                <line number="39" hits="4" branch="false" />
+                <line number="42" hits="4" branch="false" />
+                <line number="43" hits="4" branch="false" />
+                <line number="44" hits="4" branch="false" />
+                <line number="45" hits="4" branch="false" />
+                <line number="46" hits="4" branch="false" />
+                <line number="48" hits="4" branch="false" />
+                <line number="49" hits="4" branch="false" />
+                <line number="50" hits="4" branch="false" />
+                <line number="52" hits="4" branch="false" />
+                <line number="53" hits="4" branch="false" />
+                <line number="54" hits="4" branch="false" />
+                <line number="56" hits="4" branch="false" />
+                <line number="57" hits="4" branch="false" />
+                <line number="58" hits="4" branch="false" />
+                <line number="59" hits="4" branch="false" />
+                <line number="61" hits="4" branch="false" />
+                <line number="62" hits="4" branch="false" />
+                <line number="63" hits="4" branch="false" />
+                <line number="64" hits="4" branch="false" />
+                <line number="66" hits="4" branch="false" />
+                <line number="67" hits="4" branch="false" />
+                <line number="68" hits="4" branch="false" />
+                <line number="69" hits="4" branch="false" />
+                <line number="71" hits="4" branch="false" />
+                <line number="72" hits="4" branch="false" />
+                <line number="73" hits="4" branch="false" />
+                <line number="74" hits="4" branch="false" />
+                <line number="77" hits="4" branch="false" />
+                <line number="78" hits="4" branch="false" />
+                <line number="79" hits="4" branch="false" />
+                <line number="80" hits="4" branch="false" />
+                <line number="81" hits="4" branch="false" />
+                <line number="83" hits="4" branch="false" />
+                <line number="84" hits="4" branch="false" />
+                <line number="85" hits="4" branch="false" />
+                <line number="87" hits="4" branch="false" />
+                <line number="88" hits="4" branch="false" />
+                <line number="89" hits="4" branch="false" />
+                <line number="90" hits="4" branch="false" />
+                <line number="92" hits="4" branch="false" />
+                <line number="93" hits="4" branch="false" />
+                <line number="94" hits="4" branch="false" />
+                <line number="95" hits="4" branch="false" />
+                <line number="97" hits="4" branch="false" />
+                <line number="98" hits="4" branch="false" />
+                <line number="99" hits="4" branch="false" />
+                <line number="100" hits="4" branch="false" />
+                <line number="103" hits="4" branch="false" />
+                <line number="104" hits="4" branch="false" />
+                <line number="105" hits="4" branch="false" />
+                <line number="106" hits="4" branch="false" />
+                <line number="107" hits="4" branch="false" />
+                <line number="109" hits="4" branch="false" />
+                <line number="110" hits="4" branch="false" />
+                <line number="111" hits="4" branch="false" />
+                <line number="113" hits="4" branch="false" />
+                <line number="114" hits="4" branch="false" />
+                <line number="115" hits="4" branch="false" />
+                <line number="116" hits="4" branch="false" />
+                <line number="118" hits="4" branch="false" />
+                <line number="119" hits="4" branch="false" />
+                <line number="120" hits="4" branch="false" />
+                <line number="121" hits="4" branch="false" />
+                <line number="123" hits="4" branch="false" />
+                <line number="124" hits="4" branch="false" />
+                <line number="125" hits="4" branch="false" />
+                <line number="126" hits="4" branch="false" />
+                <line number="129" hits="4" branch="false" />
+                <line number="130" hits="4" branch="false" />
+                <line number="131" hits="4" branch="false" />
+                <line number="132" hits="4" branch="false" />
+                <line number="134" hits="4" branch="false" />
+                <line number="135" hits="4" branch="false" />
+                <line number="136" hits="4" branch="false" />
+                <line number="138" hits="4" branch="false" />
+                <line number="139" hits="4" branch="false" />
+                <line number="140" hits="4" branch="false" />
+                <line number="141" hits="4" branch="false" />
+                <line number="142" hits="4" branch="false" />
+                <line number="145" hits="4" branch="false" />
+                <line number="146" hits="4" branch="false" />
+                <line number="147" hits="4" branch="false" />
+                <line number="148" hits="4" branch="false" />
+                <line number="150" hits="4" branch="false" />
+                <line number="151" hits="4" branch="false" />
+                <line number="152" hits="4" branch="false" />
+                <line number="153" hits="4" branch="false" />
+                <line number="154" hits="4" branch="false" />
+                <line number="156" hits="4" branch="false" />
+                <line number="157" hits="4" branch="false" />
+                <line number="158" hits="4" branch="false" />
+                <line number="159" hits="4" branch="false" />
+                <line number="160" hits="4" branch="false" />
+                <line number="162" hits="4" branch="false" />
+                <line number="163" hits="4" branch="false" />
+                <line number="164" hits="4" branch="false" />
+                <line number="165" hits="4" branch="false" />
+                <line number="166" hits="4" branch="false" />
+                <line number="168" hits="4" branch="false" />
+                <line number="169" hits="4" branch="false" />
+                <line number="170" hits="4" branch="false" />
+                <line number="171" hits="4" branch="false" />
+                <line number="172" hits="4" branch="false" />
+                <line number="175" hits="4" branch="false" />
+                <line number="176" hits="4" branch="false" />
+                <line number="177" hits="4" branch="false" />
+                <line number="178" hits="4" branch="false" />
+                <line number="179" hits="4" branch="false" />
+                <line number="182" hits="4" branch="false" />
+                <line number="183" hits="4" branch="false" />
+                <line number="184" hits="4" branch="false" />
+                <line number="185" hits="4" branch="false" />
+                <line number="186" hits="4" branch="false" />
+                <line number="188" hits="4" branch="false" />
+                <line number="189" hits="4" branch="false" />
+                <line number="190" hits="4" branch="false" />
+                <line number="192" hits="4" branch="false" />
+                <line number="193" hits="4" branch="false" />
+                <line number="194" hits="4" branch="false" />
+                <line number="195" hits="4" branch="false" />
+                <line number="196" hits="4" branch="false" />
+                <line number="199" hits="4" branch="false" />
+                <line number="200" hits="4" branch="false" />
+                <line number="201" hits="4" branch="false" />
+                <line number="204" hits="4" branch="false" />
+                <line number="205" hits="4" branch="false" />
+                <line number="206" hits="4" branch="false" />
+                <line number="207" hits="4" branch="false" />
+                <line number="209" hits="4" branch="false" />
+                <line number="210" hits="4" branch="false" />
+                <line number="211" hits="4" branch="false" />
+                <line number="213" hits="4" branch="false" />
+                <line number="214" hits="4" branch="false" />
+                <line number="215" hits="4" branch="false" />
+                <line number="216" hits="4" branch="false" />
+                <line number="217" hits="4" branch="false" />
+                <line number="220" hits="4" branch="false" />
+                <line number="221" hits="4" branch="false" />
+                <line number="222" hits="4" branch="false" />
+                <line number="224" hits="4" branch="false" />
+                <line number="225" hits="4" branch="false" />
+                <line number="226" hits="4" branch="false" />
+                <line number="227" hits="4" branch="false" />
+                <line number="228" hits="4" branch="false" />
+                <line number="231" hits="4" branch="false" />
+                <line number="232" hits="4" branch="false" />
+                <line number="233" hits="4" branch="false" />
+                <line number="234" hits="4" branch="false" />
+                <line number="236" hits="4" branch="false" />
+                <line number="237" hits="4" branch="false" />
+                <line number="238" hits="4" branch="false" />
+                <line number="240" hits="4" branch="false" />
+                <line number="241" hits="4" branch="false" />
+                <line number="242" hits="4" branch="false" />
+                <line number="243" hits="4" branch="false" />
+                <line number="244" hits="4" branch="false" />
+                <line number="247" hits="4" branch="false" />
+                <line number="248" hits="4" branch="false" />
+                <line number="249" hits="4" branch="false" />
+                <line number="251" hits="4" branch="false" />
+                <line number="252" hits="4" branch="false" />
+                <line number="253" hits="4" branch="false" />
+                <line number="254" hits="4" branch="false" />
+                <line number="255" hits="4" branch="false" />
+                <line number="257" hits="4" branch="false" />
+                <line number="258" hits="4" branch="false" />
+                <line number="259" hits="4" branch="false" />
+                <line number="260" hits="4" branch="false" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(Microsoft.EntityFrameworkCore.DbContextOptions`1&lt;oop_s2_1_mvc_83356.Data.ApplicationDbContext&gt;)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="10" hits="204" branch="false" />
+                <line number="12" hits="204" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="10" hits="204" branch="false" />
+            <line number="12" hits="204" branch="false" />
+            <line number="29" hits="4" branch="false" />
+            <line number="32" hits="4" branch="false" />
+            <line number="33" hits="4" branch="false" />
+            <line number="34" hits="4" branch="false" />
+            <line number="35" hits="4" branch="false" />
+            <line number="37" hits="4" branch="false" />
+            <line number="38" hits="4" branch="false" />
+            <line number="39" hits="4" branch="false" />
+            <line number="42" hits="4" branch="false" />
+            <line number="43" hits="4" branch="false" />
+            <line number="44" hits="4" branch="false" />
+            <line number="45" hits="4" branch="false" />
+            <line number="46" hits="4" branch="false" />
+            <line number="48" hits="4" branch="false" />
+            <line number="49" hits="4" branch="false" />
+            <line number="50" hits="4" branch="false" />
+            <line number="52" hits="4" branch="false" />
+            <line number="53" hits="4" branch="false" />
+            <line number="54" hits="4" branch="false" />
+            <line number="56" hits="4" branch="false" />
+            <line number="57" hits="4" branch="false" />
+            <line number="58" hits="4" branch="false" />
+            <line number="59" hits="4" branch="false" />
+            <line number="61" hits="4" branch="false" />
+            <line number="62" hits="4" branch="false" />
+            <line number="63" hits="4" branch="false" />
+            <line number="64" hits="4" branch="false" />
+            <line number="66" hits="4" branch="false" />
+            <line number="67" hits="4" branch="false" />
+            <line number="68" hits="4" branch="false" />
+            <line number="69" hits="4" branch="false" />
+            <line number="71" hits="4" branch="false" />
+            <line number="72" hits="4" branch="false" />
+            <line number="73" hits="4" branch="false" />
+            <line number="74" hits="4" branch="false" />
+            <line number="77" hits="4" branch="false" />
+            <line number="78" hits="4" branch="false" />
+            <line number="79" hits="4" branch="false" />
+            <line number="80" hits="4" branch="false" />
+            <line number="81" hits="4" branch="false" />
+            <line number="83" hits="4" branch="false" />
+            <line number="84" hits="4" branch="false" />
+            <line number="85" hits="4" branch="false" />
+            <line number="87" hits="4" branch="false" />
+            <line number="88" hits="4" branch="false" />
+            <line number="89" hits="4" branch="false" />
+            <line number="90" hits="4" branch="false" />
+            <line number="92" hits="4" branch="false" />
+            <line number="93" hits="4" branch="false" />
+            <line number="94" hits="4" branch="false" />
+            <line number="95" hits="4" branch="false" />
+            <line number="97" hits="4" branch="false" />
+            <line number="98" hits="4" branch="false" />
+            <line number="99" hits="4" branch="false" />
+            <line number="100" hits="4" branch="false" />
+            <line number="103" hits="4" branch="false" />
+            <line number="104" hits="4" branch="false" />
+            <line number="105" hits="4" branch="false" />
+            <line number="106" hits="4" branch="false" />
+            <line number="107" hits="4" branch="false" />
+            <line number="109" hits="4" branch="false" />
+            <line number="110" hits="4" branch="false" />
+            <line number="111" hits="4" branch="false" />
+            <line number="113" hits="4" branch="false" />
+            <line number="114" hits="4" branch="false" />
+            <line number="115" hits="4" branch="false" />
+            <line number="116" hits="4" branch="false" />
+            <line number="118" hits="4" branch="false" />
+            <line number="119" hits="4" branch="false" />
+            <line number="120" hits="4" branch="false" />
+            <line number="121" hits="4" branch="false" />
+            <line number="123" hits="4" branch="false" />
+            <line number="124" hits="4" branch="false" />
+            <line number="125" hits="4" branch="false" />
+            <line number="126" hits="4" branch="false" />
+            <line number="129" hits="4" branch="false" />
+            <line number="130" hits="4" branch="false" />
+            <line number="131" hits="4" branch="false" />
+            <line number="132" hits="4" branch="false" />
+            <line number="134" hits="4" branch="false" />
+            <line number="135" hits="4" branch="false" />
+            <line number="136" hits="4" branch="false" />
+            <line number="138" hits="4" branch="false" />
+            <line number="139" hits="4" branch="false" />
+            <line number="140" hits="4" branch="false" />
+            <line number="141" hits="4" branch="false" />
+            <line number="142" hits="4" branch="false" />
+            <line number="145" hits="4" branch="false" />
+            <line number="146" hits="4" branch="false" />
+            <line number="147" hits="4" branch="false" />
+            <line number="148" hits="4" branch="false" />
+            <line number="150" hits="4" branch="false" />
+            <line number="151" hits="4" branch="false" />
+            <line number="152" hits="4" branch="false" />
+            <line number="153" hits="4" branch="false" />
+            <line number="154" hits="4" branch="false" />
+            <line number="156" hits="4" branch="false" />
+            <line number="157" hits="4" branch="false" />
+            <line number="158" hits="4" branch="false" />
+            <line number="159" hits="4" branch="false" />
+            <line number="160" hits="4" branch="false" />
+            <line number="162" hits="4" branch="false" />
+            <line number="163" hits="4" branch="false" />
+            <line number="164" hits="4" branch="false" />
+            <line number="165" hits="4" branch="false" />
+            <line number="166" hits="4" branch="false" />
+            <line number="168" hits="4" branch="false" />
+            <line number="169" hits="4" branch="false" />
+            <line number="170" hits="4" branch="false" />
+            <line number="171" hits="4" branch="false" />
+            <line number="172" hits="4" branch="false" />
+            <line number="175" hits="4" branch="false" />
+            <line number="176" hits="4" branch="false" />
+            <line number="177" hits="4" branch="false" />
+            <line number="178" hits="4" branch="false" />
+            <line number="179" hits="4" branch="false" />
+            <line number="182" hits="4" branch="false" />
+            <line number="183" hits="4" branch="false" />
+            <line number="184" hits="4" branch="false" />
+            <line number="185" hits="4" branch="false" />
+            <line number="186" hits="4" branch="false" />
+            <line number="188" hits="4" branch="false" />
+            <line number="189" hits="4" branch="false" />
+            <line number="190" hits="4" branch="false" />
+            <line number="192" hits="4" branch="false" />
+            <line number="193" hits="4" branch="false" />
+            <line number="194" hits="4" branch="false" />
+            <line number="195" hits="4" branch="false" />
+            <line number="196" hits="4" branch="false" />
+            <line number="199" hits="4" branch="false" />
+            <line number="200" hits="4" branch="false" />
+            <line number="201" hits="4" branch="false" />
+            <line number="204" hits="4" branch="false" />
+            <line number="205" hits="4" branch="false" />
+            <line number="206" hits="4" branch="false" />
+            <line number="207" hits="4" branch="false" />
+            <line number="209" hits="4" branch="false" />
+            <line number="210" hits="4" branch="false" />
+            <line number="211" hits="4" branch="false" />
+            <line number="213" hits="4" branch="false" />
+            <line number="214" hits="4" branch="false" />
+            <line number="215" hits="4" branch="false" />
+            <line number="216" hits="4" branch="false" />
+            <line number="217" hits="4" branch="false" />
+            <line number="220" hits="4" branch="false" />
+            <line number="221" hits="4" branch="false" />
+            <line number="222" hits="4" branch="false" />
+            <line number="224" hits="4" branch="false" />
+            <line number="225" hits="4" branch="false" />
+            <line number="226" hits="4" branch="false" />
+            <line number="227" hits="4" branch="false" />
+            <line number="228" hits="4" branch="false" />
+            <line number="231" hits="4" branch="false" />
+            <line number="232" hits="4" branch="false" />
+            <line number="233" hits="4" branch="false" />
+            <line number="234" hits="4" branch="false" />
+            <line number="236" hits="4" branch="false" />
+            <line number="237" hits="4" branch="false" />
+            <line number="238" hits="4" branch="false" />
+            <line number="240" hits="4" branch="false" />
+            <line number="241" hits="4" branch="false" />
+            <line number="242" hits="4" branch="false" />
+            <line number="243" hits="4" branch="false" />
+            <line number="244" hits="4" branch="false" />
+            <line number="247" hits="4" branch="false" />
+            <line number="248" hits="4" branch="false" />
+            <line number="249" hits="4" branch="false" />
+            <line number="251" hits="4" branch="false" />
+            <line number="252" hits="4" branch="false" />
+            <line number="253" hits="4" branch="false" />
+            <line number="254" hits="4" branch="false" />
+            <line number="255" hits="4" branch="false" />
+            <line number="257" hits="4" branch="false" />
+            <line number="258" hits="4" branch="false" />
+            <line number="259" hits="4" branch="false" />
+            <line number="260" hits="4" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Models.AdminProfile" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Models/AdminProfile.cs" line-rate="1" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="11" hits="12" branch="false" />
+                <line number="15" hits="12" branch="false" />
+                <line number="19" hits="12" branch="false" />
+                <line number="24" hits="12" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="11" hits="12" branch="false" />
+            <line number="15" hits="12" branch="false" />
+            <line number="19" hits="12" branch="false" />
+            <line number="24" hits="12" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Models.ApplicationUser" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Models/ApplicationUser.cs" line-rate="1" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="10" hits="16" branch="false" />
+                <line number="12" hits="16" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="10" hits="16" branch="false" />
+            <line number="12" hits="16" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Models.Assignment" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Models/Assignment.cs" line-rate="1" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="15" hits="18" branch="false" />
+                <line number="24" hits="18" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="15" hits="18" branch="false" />
+            <line number="24" hits="18" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Models.Branch" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Models/Branch.cs" line-rate="1" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="11" hits="198" branch="false" />
+                <line number="14" hits="198" branch="false" />
+                <line number="17" hits="198" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="11" hits="198" branch="false" />
+            <line number="14" hits="198" branch="false" />
+            <line number="17" hits="198" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Models.Course" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Models/Course.cs" line-rate="1" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="12" hits="192" branch="false" />
+                <line number="22" hits="192" branch="false" />
+                <line number="23" hits="192" branch="false" />
+                <line number="24" hits="192" branch="false" />
+                <line number="25" hits="192" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="12" hits="192" branch="false" />
+            <line number="22" hits="192" branch="false" />
+            <line number="23" hits="192" branch="false" />
+            <line number="24" hits="192" branch="false" />
+            <line number="25" hits="192" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Models.CourseEnrolment" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Models/CourseEnrolment.cs" line-rate="1" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="23" hits="128" branch="false" />
+                <line number="31" hits="128" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="23" hits="128" branch="false" />
+            <line number="31" hits="128" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Models.Exam" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Models/Exam.cs" line-rate="1" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="15" hits="66" branch="false" />
+                <line number="26" hits="66" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="15" hits="66" branch="false" />
+            <line number="26" hits="66" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Models.FacultyProfile" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Models/FacultyProfile.cs" line-rate="1" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="11" hits="10" branch="false" />
+                <line number="15" hits="10" branch="false" />
+                <line number="19" hits="10" branch="false" />
+                <line number="24" hits="10" branch="false" />
+                <line number="35" hits="10" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="11" hits="10" branch="false" />
+            <line number="15" hits="10" branch="false" />
+            <line number="19" hits="10" branch="false" />
+            <line number="24" hits="10" branch="false" />
+            <line number="35" hits="10" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Models.StudentProfile" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Models/StudentProfile.cs" line-rate="1" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="11" hits="188" branch="false" />
+                <line number="15" hits="188" branch="false" />
+                <line number="19" hits="188" branch="false" />
+                <line number="23" hits="188" branch="false" />
+                <line number="28" hits="188" branch="false" />
+                <line number="41" hits="188" branch="false" />
+                <line number="42" hits="188" branch="false" />
+                <line number="43" hits="188" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="11" hits="188" branch="false" />
+            <line number="15" hits="188" branch="false" />
+            <line number="19" hits="188" branch="false" />
+            <line number="23" hits="188" branch="false" />
+            <line number="28" hits="188" branch="false" />
+            <line number="41" hits="188" branch="false" />
+            <line number="42" hits="188" branch="false" />
+            <line number="43" hits="188" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Pages.ErrorModel" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Pages/Error.cshtml.cs" line-rate="0" branch-rate="0" complexity="6">
+          <methods>
+            <method name="get_ShowRequestId" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="13" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name="OnGet" signature="()" line-rate="0" branch-rate="0" complexity="4">
+              <lines>
+                <line number="24" hits="0" branch="true" condition-coverage="0% (0/4)" />
+                <line number="25" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(Microsoft.Extensions.Logging.ILogger`1&lt;oop_s2_1_mvc_83356.Pages.ErrorModel&gt;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="17" hits="0" branch="false" />
+                <line number="19" hits="0" branch="false" />
+                <line number="20" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="13" hits="0" branch="false" />
+            <line number="17" hits="0" branch="false" />
+            <line number="19" hits="0" branch="false" />
+            <line number="20" hits="0" branch="false" />
+            <line number="24" hits="0" branch="true" condition-coverage="0% (0/4)" />
+            <line number="25" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Pages.IndexModel" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Pages/Index.cshtml.cs" line-rate="0" branch-rate="1" complexity="2">
+          <methods>
+            <method name="OnGet" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="18" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(Microsoft.Extensions.Logging.ILogger`1&lt;oop_s2_1_mvc_83356.Pages.IndexModel&gt;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="10" hits="0" branch="false" />
+                <line number="12" hits="0" branch="false" />
+                <line number="13" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="10" hits="0" branch="false" />
+            <line number="12" hits="0" branch="false" />
+            <line number="13" hits="0" branch="false" />
+            <line number="18" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Pages.PrivacyModel" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Pages/Privacy.cshtml.cs" line-rate="0" branch-rate="1" complexity="2">
+          <methods>
+            <method name="OnGet" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="17" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(Microsoft.Extensions.Logging.ILogger`1&lt;oop_s2_1_mvc_83356.Pages.PrivacyModel&gt;)" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="10" hits="0" branch="false" />
+                <line number="12" hits="0" branch="false" />
+                <line number="13" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="10" hits="0" branch="false" />
+            <line number="12" hits="0" branch="false" />
+            <line number="13" hits="0" branch="false" />
+            <line number="17" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Services.AttendanceService" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Services/AttendanceService.cs" line-rate="1" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="(oop_s2_1_mvc_83356.Data.ApplicationDbContext,Microsoft.Extensions.Logging.ILogger`1&lt;oop_s2_1_mvc_83356.Services.AttendanceService&gt;)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="12" hits="48" branch="false" />
+                <line number="14" hits="48" branch="false" />
+                <line number="15" hits="48" branch="false" />
+                <line number="16" hits="48" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="12" hits="48" branch="false" />
+            <line number="14" hits="48" branch="false" />
+            <line number="15" hits="48" branch="false" />
+            <line number="16" hits="48" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Services.EnrolmentService" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Services/EnrolmentService.cs" line-rate="1" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="(oop_s2_1_mvc_83356.Data.ApplicationDbContext,Microsoft.Extensions.Logging.ILogger`1&lt;oop_s2_1_mvc_83356.Services.EnrolmentService&gt;)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="12" hits="42" branch="false" />
+                <line number="14" hits="42" branch="false" />
+                <line number="15" hits="42" branch="false" />
+                <line number="16" hits="42" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="12" hits="42" branch="false" />
+            <line number="14" hits="42" branch="false" />
+            <line number="15" hits="42" branch="false" />
+            <line number="16" hits="42" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Services.ExamResultService" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Services/ExamResultService.cs" line-rate="1" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="(oop_s2_1_mvc_83356.Data.ApplicationDbContext,Microsoft.Extensions.Logging.ILogger`1&lt;oop_s2_1_mvc_83356.Services.ExamResultService&gt;)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="12" hits="32" branch="false" />
+                <line number="14" hits="32" branch="false" />
+                <line number="15" hits="32" branch="false" />
+                <line number="16" hits="32" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="12" hits="32" branch="false" />
+            <line number="14" hits="32" branch="false" />
+            <line number="15" hits="32" branch="false" />
+            <line number="16" hits="32" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.Services.GradeService" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Services/GradeService.cs" line-rate="1" branch-rate="1" complexity="15">
+          <methods>
+            <method name="CalculateGrade" signature="(System.Decimal,System.Decimal)" line-rate="1" branch-rate="1" complexity="8">
+              <lines>
+                <line number="20" hits="96" branch="true" condition-coverage="100% (2/2)" />
+                <line number="22" hits="14" branch="false" />
+                <line number="23" hits="14" branch="false" />
+                <line number="26" hits="82" branch="false" />
+                <line number="28" hits="82" branch="true" condition-coverage="100% (6/6)" />
+                <line number="29" hits="82" branch="false" />
+                <line number="30" hits="18" branch="false" />
+                <line number="31" hits="22" branch="false" />
+                <line number="32" hits="18" branch="false" />
+                <line number="33" hits="24" branch="false" />
+                <line number="34" hits="82" branch="false" />
+              </lines>
+            </method>
+            <method name="GetPercentage" signature="(System.Decimal,System.Decimal)" line-rate="1" branch-rate="1" complexity="2">
+              <lines>
+                <line number="42" hits="118" branch="true" condition-coverage="100% (2/2)" />
+                <line number="44" hits="4" branch="false" />
+                <line number="45" hits="4" branch="false" />
+                <line number="48" hits="114" branch="false" />
+                <line number="49" hits="114" branch="false" />
+              </lines>
+            </method>
+            <method name="IsValidScore" signature="(System.Decimal,System.Decimal)" line-rate="1" branch-rate="1" complexity="4">
+              <lines>
+                <line number="57" hits="120" branch="true" condition-coverage="100% (4/4)" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="(Microsoft.Extensions.Logging.ILogger`1&lt;oop_s2_1_mvc_83356.Services.GradeService&gt;)" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="9" hits="140" branch="false" />
+                <line number="11" hits="140" branch="false" />
+                <line number="12" hits="140" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="9" hits="140" branch="false" />
+            <line number="11" hits="140" branch="false" />
+            <line number="12" hits="140" branch="false" />
+            <line number="20" hits="96" branch="true" condition-coverage="100% (2/2)" />
+            <line number="22" hits="14" branch="false" />
+            <line number="23" hits="14" branch="false" />
+            <line number="26" hits="82" branch="false" />
+            <line number="28" hits="82" branch="true" condition-coverage="100% (6/6)" />
+            <line number="29" hits="82" branch="false" />
+            <line number="30" hits="18" branch="false" />
+            <line number="31" hits="22" branch="false" />
+            <line number="32" hits="18" branch="false" />
+            <line number="33" hits="24" branch="false" />
+            <line number="34" hits="82" branch="false" />
+            <line number="42" hits="118" branch="true" condition-coverage="100% (2/2)" />
+            <line number="44" hits="4" branch="false" />
+            <line number="45" hits="4" branch="false" />
+            <line number="48" hits="114" branch="false" />
+            <line number="49" hits="114" branch="false" />
+            <line number="57" hits="120" branch="true" condition-coverage="100% (4/4)" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.ViewModels.AssignmentResultViewModel" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/ViewModels/Admin/StudentViewModels.cs" line-rate="0" branch-rate="0" complexity="2">
+          <methods>
+            <method name="get_Percentage" signature="()" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="84" hits="0" branch="true" condition-coverage="0% (0/2)" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="84" hits="0" branch="true" condition-coverage="0% (0/2)" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.ViewModels.AttendanceHistoryViewModel" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/ViewModels/Admin/StudentViewModels.cs" line-rate="0" branch-rate="0" complexity="3">
+          <methods>
+            <method name="get_AttendanceRate" signature="()" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="108" hits="0" branch="true" condition-coverage="0% (0/2)" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="104" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="104" hits="0" branch="false" />
+            <line number="108" hits="0" branch="true" condition-coverage="0% (0/2)" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.ViewModels.AttendanceIndexViewModel" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/ViewModels/Admin/AttendanceAndExamViewModels.cs" line-rate="0" branch-rate="0" complexity="3">
+          <methods>
+            <method name="get_AttendanceRate" signature="()" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="17" hits="0" branch="true" condition-coverage="0% (0/2)" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="12" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="12" hits="0" branch="false" />
+            <line number="17" hits="0" branch="true" condition-coverage="0% (0/2)" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.ViewModels.AttendanceSessionViewModel" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/ViewModels/Admin/AttendanceAndExamViewModels.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name="get_DayOfWeek" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="32" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="32" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.ViewModels.AttendanceWeekViewModel" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/ViewModels/Admin/AttendanceAndExamViewModels.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="24" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="24" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.ViewModels.BranchCreateEditViewModel" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/ViewModels/Admin/BranchViewModels.cs" line-rate="0" branch-rate="0" complexity="2">
+          <methods>
+            <method name="get_PageTitle" signature="()" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="33" hits="0" branch="true" condition-coverage="0% (0/2)" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="33" hits="0" branch="true" condition-coverage="0% (0/2)" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.ViewModels.BranchDetailsViewModel" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/ViewModels/Admin/BranchViewModels.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="18" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="18" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.ViewModels.BranchDto" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Models/HomeViewModel.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="43" hits="0" branch="false" />
+                <line number="44" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="43" hits="0" branch="false" />
+            <line number="44" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.ViewModels.CourseCreateEditViewModel" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/ViewModels/Admin/CourseViewModels.cs" line-rate="0.5" branch-rate="0" complexity="3">
+          <methods>
+            <method name="get_PageTitle" signature="()" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="54" hits="0" branch="true" condition-coverage="0% (0/2)" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="53" hits="2" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="53" hits="2" branch="false" />
+            <line number="54" hits="0" branch="true" condition-coverage="0% (0/2)" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.ViewModels.CourseDetailsViewModel" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/ViewModels/Admin/CourseViewModels.cs" line-rate="1" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="()" line-rate="1" branch-rate="1" complexity="1">
+              <lines>
+                <line number="24" hits="2" branch="false" />
+                <line number="25" hits="2" branch="false" />
+                <line number="26" hits="2" branch="false" />
+                <line number="27" hits="2" branch="false" />
+                <line number="31" hits="2" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="24" hits="2" branch="false" />
+            <line number="25" hits="2" branch="false" />
+            <line number="26" hits="2" branch="false" />
+            <line number="27" hits="2" branch="false" />
+            <line number="31" hits="2" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.ViewModels.CourseEnrolmentStudentViewModel" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/ViewModels/Admin/CourseViewModels.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name="get_FullName" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="91" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="91" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.ViewModels.EnrolmentCreateEditViewModel" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/ViewModels/Admin/EnrolmentViewModels.cs" line-rate="0" branch-rate="0" complexity="3">
+          <methods>
+            <method name="get_PageTitle" signature="()" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="34" hits="0" branch="true" condition-coverage="0% (0/2)" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="32" hits="0" branch="false" />
+                <line number="33" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="32" hits="0" branch="false" />
+            <line number="33" hits="0" branch="false" />
+            <line number="34" hits="0" branch="true" condition-coverage="0% (0/2)" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.ViewModels.ExamResultViewModel" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/ViewModels/Admin/StudentViewModels.cs" line-rate="0" branch-rate="0" complexity="2">
+          <methods>
+            <method name="get_Percentage" signature="()" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="98" hits="0" branch="true" condition-coverage="0% (0/2)" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="98" hits="0" branch="true" condition-coverage="0% (0/2)" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.ViewModels.FacultyBasicViewModel" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/ViewModels/Admin/CourseViewModels.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name="get_FullName" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="78" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="78" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.ViewModels.HomeViewModel" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Models/HomeViewModel.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="13" hits="0" branch="false" />
+                <line number="14" hits="0" branch="false" />
+                <line number="15" hits="0" branch="false" />
+                <line number="17" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="13" hits="0" branch="false" />
+            <line number="14" hits="0" branch="false" />
+            <line number="15" hits="0" branch="false" />
+            <line number="17" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.ViewModels.RecentCourseDto" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Models/HomeViewModel.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="23" hits="0" branch="false" />
+                <line number="24" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="23" hits="0" branch="false" />
+            <line number="24" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.ViewModels.StudentBasicViewModel" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/ViewModels/Admin/EnrolmentViewModels.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name="get_FullName" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="44" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="44" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.ViewModels.StudentCreateEditViewModel" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/ViewModels/Admin/StudentViewModels.cs" line-rate="0" branch-rate="0" complexity="2">
+          <methods>
+            <method name="get_PageTitle" signature="()" line-rate="0" branch-rate="0" complexity="2">
+              <lines>
+                <line number="61" hits="0" branch="true" condition-coverage="0% (0/2)" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="61" hits="0" branch="true" condition-coverage="0% (0/2)" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.ViewModels.StudentDetailsViewModel" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/ViewModels/Admin/StudentViewModels.cs" line-rate="0" branch-rate="1" complexity="2">
+          <methods>
+            <method name="get_FullName" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="33" hits="0" branch="false" />
+              </lines>
+            </method>
+            <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="28" hits="0" branch="false" />
+                <line number="29" hits="0" branch="false" />
+                <line number="30" hits="0" branch="false" />
+                <line number="31" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="28" hits="0" branch="false" />
+            <line number="29" hits="0" branch="false" />
+            <line number="30" hits="0" branch="false" />
+            <line number="31" hits="0" branch="false" />
+            <line number="33" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.ViewModels.StudentIndexViewModel" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/ViewModels/Admin/StudentViewModels.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name="get_FullName" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="14" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="14" hits="0" branch="false" />
+          </lines>
+        </class>
+        <class name="oop_s2_1_mvc_83356.ViewModels.TopStudentDto" filename="/home/runner/work/oop-s2-3-mvc-83356/oop-s2-3-mvc-83356/oop-s2-1-mvc-83356/Models/HomeViewModel.cs" line-rate="0" branch-rate="1" complexity="1">
+          <methods>
+            <method name=".ctor" signature="()" line-rate="0" branch-rate="1" complexity="1">
+              <lines>
+                <line number="33" hits="0" branch="false" />
+                <line number="34" hits="0" branch="false" />
+                <line number="35" hits="0" branch="false" />
+              </lines>
+            </method>
+          </methods>
+          <lines>
+            <line number="33" hits="0" branch="false" />
+            <line number="34" hits="0" branch="false" />
+            <line number="35" hits="0" branch="false" />
+          </lines>
+        </class>
+      </classes>
+    </package>
+  </packages>
+</coverage>
