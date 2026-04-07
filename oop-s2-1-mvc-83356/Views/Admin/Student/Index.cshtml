@@ -1,0 +1,69 @@
+@model List<StudentIndexViewModel>
+
+@{
+    ViewData["Title"] = "Students Management";
+}
+
+<div class="container-fluid py-4">
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h1 class="h3 mb-0">
+                <i class="fas fa-graduation-cap"></i> Students
+            </h1>
+        </div>
+        <div class="col-md-6 text-end">
+            <a href="@Url.Action("Create", "Student")" class="btn btn-primary">
+                <i class="fas fa-plus"></i> New Student
+            </a>
+        </div>
+    </div>
+
+    @if (Model.Count == 0)
+    {
+        <div class="alert alert-info" role="alert">
+            No students found. <a href="@Url.Action("Create", "Student")" class="alert-link">Create one</a>
+        </div>
+    }
+    else
+    {
+        <div class="card">
+            <div class="table-responsive">
+                <table class="table table-hover mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Student Number</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th class="text-center">Enrolments</th>
+                            <th class="text-center" style="width: 120px;">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var student in Model.OrderBy(s => s.StudentNumber))
+                        {
+                            <tr>
+                                <td><code>@student.StudentNumber</code></td>
+                                <td><strong>@student.FullName</strong></td>
+                                <td>@student.Email</td>
+                                <td class="text-center">
+                                    <span class="badge bg-info">@student.EnrolmentCount</span>
+                                </td>
+                                <td class="text-center">
+                                    <a href="@Url.Action("Details", "Student", new { id = student.Id })" class="btn btn-sm btn-info" title="View Student Details">
+                                        <i class="fas fa-eye"></i> View
+                                    </a>
+                                    <a href="@Url.Action("Edit", "Student", new { id = student.Id })" class="btn btn-sm btn-warning" title="Edit Student">
+                                        <i class="fas fa-edit"></i> Edit
+                                    </a>
+                                    <a href="@Url.Action("Delete", "Student", new { id = student.Id })" class="btn btn-sm btn-danger" title="Delete Student">
+                                        <i class="fas fa-trash"></i> Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    }
+</div>

@@ -1,0 +1,99 @@
+@model EnrolmentCreateEditViewModel
+
+@{
+    ViewData["Title"] = Model.PageTitle;
+}
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-clipboard-check"></i> @Model.PageTitle
+                    </h5>
+                </div>
+                <div class="card-body">
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div class="alert alert-danger" role="alert">
+                            <i class="bi bi-exclamation-circle"></i> <strong>Validation Errors:</strong>
+                            <ul class="mb-0">
+                                @foreach (var modelState in ViewData.ModelState.Values)
+                                {
+                                    @foreach (var error in modelState.Errors)
+                                    {
+                                        <li>@error.ErrorMessage</li>
+                                    }
+                                }
+                            </ul>
+                        </div>
+                    }
+
+                    <form method="post" action="@(Model.Id == 0 ? Url.Action("CreatePost", "Enrolment") : Url.Action("EditPost", "Enrolment", new { id = Model.Id }))">
+                        @Html.AntiForgeryToken()
+
+                        <div class="mb-3">
+                            <label asp-for="StudentProfileId" class="form-label">Student <span class="text-danger">*</span></label>
+                            <select asp-for="StudentProfileId" class="form-select" required>
+                                <option value="">-- Select Student --</option>
+                                @foreach (var student in Model.Students.OrderBy(s => s.StudentNumber))
+                                {
+                                    <option value="@student.Id" selected="@(Model.StudentProfileId == student.Id)">@student.FullName (@student.StudentNumber)</option>
+                                }
+                            </select>
+                            <small class="form-text text-muted">Only students who are not already enrolled in the selected course can be added.</small>
+                            <span asp-validation-for="StudentProfileId" class="invalid-feedback d-block"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="CourseId" class="form-label">Course <span class="text-danger">*</span></label>
+                            <select asp-for="CourseId" class="form-select" required>
+                                <option value="">-- Select Course --</option>
+                                @foreach (var course in Model.Courses.OrderBy(c => c.Name))
+                                {
+                                    <option value="@course.Id" selected="@(Model.CourseId == course.Id)">@course.Name @(course.StartDate.HasValue ? $"(Starts: {course.StartDate:MMM dd, yyyy})" : "")</option>
+                                }
+                            </select>
+                            <span asp-validation-for="CourseId" class="invalid-feedback d-block"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="EnrolmentDate" class="form-label">Enrolment Date <span class="text-danger">*</span></label>
+                            <input asp-for="EnrolmentDate" type="datetime-local" class="form-control" required>
+                            <small class="form-text text-muted">Enrolment date must be on or after the course start date.</small>
+                            <span asp-validation-for="EnrolmentDate" class="invalid-feedback d-block"></span>
+                        </div>
+
+                        @if (Model.Id != 0)
+                        {
+                            <div class="mb-3">
+                                <label asp-for="Status" class="form-label">Status <span class="text-danger">*</span></label>
+                                <select asp-for="Status" class="form-select" required>
+                                    <option value="Active" selected="@(Model.Status == "Active")">Active</option>
+                                    <option value="Withdrawn" selected="@(Model.Status == "Withdrawn")">Withdrawn</option>
+                                    <option value="Completed" selected="@(Model.Status == "Completed")">Completed</option>
+                                </select>
+                                <span asp-validation-for="Status" class="invalid-feedback d-block"></span>
+                            </div>
+                        }
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> @(Model.Id == 0 ? "Create Enrolment" : "Update Enrolment")
+                            </button>
+                            <a href="@Url.Action("Index", "Enrolment")" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

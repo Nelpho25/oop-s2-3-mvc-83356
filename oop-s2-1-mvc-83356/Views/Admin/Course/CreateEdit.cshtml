@@ -1,0 +1,68 @@
+@model CourseCreateEditViewModel
+
+@{
+    ViewData["Title"] = Model.PageTitle;
+}
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-book"></i> @Model.PageTitle
+                    </h5>
+                </div>
+                <div class="card-body">
+                    <form method="post" action="@(Model.Id == 0 ? Url.Action("CreatePost", "Course") : Url.Action("EditPost", "Course", new { id = Model.Id }))">
+                        @Html.AntiForgeryToken()
+
+                        <div class="mb-3">
+                            <label asp-for="Name" class="form-label">Course Name</label>
+                            <input asp-for="Name" type="text" class="form-control" placeholder="Enter course name">
+                            <span asp-validation-for="Name" class="invalid-feedback"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="BranchId" class="form-label">Branch</label>
+                            <select asp-for="BranchId" class="form-select">
+                                <option value="">-- Select Branch --</option>
+                                @foreach (var branch in Model.Branches)
+                                {
+                                    <option value="@branch.Id">@branch.Name</option>
+                                }
+                            </select>
+                            <span asp-validation-for="BranchId" class="invalid-feedback"></span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="StartDate" class="form-label">Start Date</label>
+                                <input asp-for="StartDate" type="datetime-local" class="form-control">
+                                <span asp-validation-for="StartDate" class="invalid-feedback"></span>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="EndDate" class="form-label">End Date</label>
+                                <input asp-for="EndDate" type="datetime-local" class="form-control">
+                                <span asp-validation-for="EndDate" class="invalid-feedback"></span>
+                            </div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> @(Model.Id == 0 ? "Create Course" : "Update Course")
+                            </button>
+                            <a href="@Url.Action("Index", "Course")" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

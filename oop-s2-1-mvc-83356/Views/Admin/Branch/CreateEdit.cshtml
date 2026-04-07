@@ -1,0 +1,75 @@
+@model BranchCreateEditViewModel
+
+@{
+    ViewData["Title"] = Model.PageTitle;
+}
+
+<div class="container-fluid py-4">
+    <div class="row">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="mb-0">
+                        <i class="fas fa-code-branch"></i> @Model.PageTitle
+                    </h5>
+                </div>
+                <div class="card-body">
+                    @{
+                        var errors = new List<string>();
+                        foreach (var modelState in ViewData.ModelState.Values)
+                        {
+                            foreach (var error in modelState.Errors)
+                            {
+                                if (!string.IsNullOrEmpty(error.ErrorMessage))
+                                {
+                                    errors.Add(error.ErrorMessage);
+                                }
+                            }
+                        }
+                    }
+
+                    @if (errors.Any())
+                    {
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <i class="bi bi-exclamation-triangle"></i> <strong>Please correct the errors below:</strong>
+                            @foreach (var error in errors)
+                            {
+                                <div>@error</div>
+                            }
+                            <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                        </div>
+                    }
+
+                    <form method="post" action="@(Model.Id == 0 ? Url.Action("CreatePost", "Branch") : Url.Action("EditPost", "Branch", new { id = Model.Id }))">
+                        @Html.AntiForgeryToken()
+
+                        <div class="mb-3">
+                            <label asp-for="Name" class="form-label">Branch Name</label>
+                            <input asp-for="Name" type="text" class="form-control" placeholder="Enter branch name">
+                            <span asp-validation-for="Name" class="invalid-feedback d-block"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Address" class="form-label">Address</label>
+                            <textarea asp-for="Address" class="form-control" rows="3" placeholder="Enter branch address"></textarea>
+                            <span asp-validation-for="Address" class="invalid-feedback d-block"></span>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> @(Model.Id == 0 ? "Create Branch" : "Update Branch")
+                            </button>
+                            <a href="@Url.Action("Index", "Branch")" class="btn btn-secondary">
+                                <i class="fas fa-times"></i> Cancel
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
