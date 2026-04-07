@@ -162,7 +162,7 @@ Status: BUILD SUCCESSFUL
 
 ### 4. ADMIN PROFILE BUTTON ✅
 - Profile link in navbar dropdown works
-- Shows admin user information
+- Shows admin user information.
 - No longer returns error
 - AdminProfile fully populated with seeded data
 

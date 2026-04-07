@@ -46,16 +46,41 @@ jobs:
           reportgenerator \
             -reports:"./TestResults/**/coverage.cobertura.xml" \
             -targetdir:"./coveragereport" \
-            -reporttypes:"Html;Cobertura" \
+            -reporttypes:"Html;Cobertura;JsonSummary" \
             -classfilters:"-*.Migrations.*,-*Program,-*.Views.*"
 
-      - name: Verify Coverage Report Generated
+      - name: Validate and Display Coverage XML
         run: |
-          echo "=== Checking if coverage XML exists ==="
-          find ./TestResults -name "*.xml" -type f 2>/dev/null || echo "No XML files found!"
-          echo ""
-          echo "=== Checking generated report directory ==="
+          echo "=== Checking for Cobertura XML ==="
+          if [ -f "./TestResults/*/coverage.cobertura.xml" ]; then
+            XML_FILE=$(find ./TestResults -name "coverage.cobertura.xml" | head -1)
+            echo "✅ Found XML at: $XML_FILE"
+            echo ""
+            echo "=== XML File Size ==="
+            wc -c "$XML_FILE"
+            echo ""
+            echo "=== XML Root Element ==="
+            head -5 "$XML_FILE"
+            echo ""
+            echo "=== XML Line Count ==="
+            wc -l "$XML_FILE"
+          else
+            echo "❌ No Cobertura XML found!"
+            find ./TestResults -type f 2>/dev/null | head -20
+          fi
+
+      - name: Verify Generated Coverage Report
+        run: |
+          echo "=== Generated Report Files ==="
           ls -la ./coveragereport/ 2>/dev/null || echo "Directory does not exist!"
+          echo ""
+          echo "=== Checking Cobertura output in report ==="
+          if [ -f "./coveragereport/coverage.cobertura.xml" ]; then
+            echo "✅ coverage.cobertura.xml in report"
+            head -10 ./coveragereport/coverage.cobertura.xml
+          else
+            echo "❌ coverage.cobertura.xml NOT in report"
+          fi
           echo ""
           echo "=== Checking for index.html ==="
           if [ -f "./coveragereport/index.html" ]; then
@@ -63,8 +88,11 @@ jobs:
             head -20 ./coveragereport/index.html
           else
             echo "❌ index.html NOT FOUND!"
-            echo "All files in coveragereport:"
-            find ./coveragereport -type f 2>/dev/null | head -20
+          fi
+          echo ""
+          echo "=== JSON Summary (if generated) ==="
+          if [ -f "./coveragereport/Summary.json" ]; then
+            cat ./coveragereport/Summary.json
           fi
 
       - name: Upload Test Results
@@ -81,6 +109,18 @@ jobs:
           name: coverage-report
           path: ./coveragereport
           retention-days: 30
+
+      - name: Copy Cobertura XML to Report Directory
+        run: |
+          echo "=== Copying coverage XML to report directory ==="
+          SOURCE_XML=$(find ./TestResults -name "coverage.cobertura.xml" | head -1)
+          if [ -f "$SOURCE_XML" ]; then
+            cp "$SOURCE_XML" ./coveragereport/coverage.cobertura.xml
+            echo "✅ Copied: $SOURCE_XML -> ./coveragereport/coverage.cobertura.xml"
+            echo "File size: $(wc -c < ./coveragereport/coverage.cobertura.xml) bytes"
+          else
+            echo "❌ Source XML not found"
+          fi
 
       - name: Deploy to GitHub Pages
         if: github.event_name == 'push' && github.ref == 'refs/heads/master'
