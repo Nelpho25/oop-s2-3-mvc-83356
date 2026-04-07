@@ -36,6 +36,20 @@ public class GradeServiceTests
     }
 
     [Theory]
+    [InlineData(45, 50, "A")]    // 90% → A (was "F" which is incorrect)
+    [InlineData(37.5, 50, "B")]  // 75% → B
+    [InlineData(30, 50, "C")]    // 60% → C
+    [InlineData(15, 50, "F")]    // 30% → F
+    public void CalculateGrade_WithDifferentMaxScores_ReturnsCorrectGrade(decimal score, decimal maxScore, string expectedGrade)
+    {
+        // Act
+        var grade = _service.CalculateGrade(score, maxScore);
+
+        // Assert
+        grade.Should().Be(expectedGrade);
+    }
+
+    [Theory]
     [InlineData(100, 100, 100)]
     [InlineData(90, 100, 90)]
     [InlineData(75, 100, 75)]
@@ -93,18 +107,5 @@ public class GradeServiceTests
 
         // Assert
         percentage.Should().Be(100);
-    }
-
-    [Theory]
-    [InlineData(45, 50, "F")]  // 90% but with different max score
-    [InlineData(37.5, 50, "B")] // 75%
-    [InlineData(30, 50, "C")]    // 60%
-    public void CalculateGrade_WithDifferentMaxScores_ReturnsCorrectGrade(decimal score, decimal maxScore, string expectedGrade)
-    {
-        // Act
-        var grade = _service.CalculateGrade(score, maxScore);
-
-        // Assert
-        grade.Should().Be(expectedGrade);
     }
 }
