@@ -1,10 +1,368 @@
 ﻿@page
 @model IndexModel
+@using Microsoft.AspNetCore.Identity
+@using oop_s2_1_mvc_83356.Models
+@inject UserManager<ApplicationUser> UserManager
 @{
-    ViewData["Title"] = "Home page";
+    ViewData["Title"] = "VGC College - Home";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<style>
+    :root {
+        --vgc-primary: #003580;
+        --vgc-light: #f8f9fa;
+    }
+
+    .hero-section {
+        background: linear-gradient(135deg, var(--vgc-primary) 0%, #004fa8 100%);
+        color: white;
+        padding: 4rem 2rem;
+        margin: -1rem 0 3rem 0;
+        border-radius: 0;
+        box-shadow: 0 4px 10px rgba(0, 53, 128, 0.15);
+    }
+
+    .hero-section h1 {
+        font-size: 2.8rem;
+        font-weight: 800;
+        letter-spacing: -0.5px;
+    }
+
+    .hero-section p {
+        font-size: 1.1rem;
+        opacity: 0.95;
+        margin-bottom: 1.5rem;
+    }
+
+    .stats-card {
+        background: white;
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        padding: 2rem;
+        text-align: center;
+        transition: transform 0.3s, box-shadow 0.3s;
+        margin-bottom: 1.5rem;
+    }
+
+    .stats-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 15px rgba(0, 53, 128, 0.2);
+    }
+
+    .stats-number {
+        font-size: 2.5rem;
+        font-weight: 800;
+        color: var(--vgc-primary);
+    }
+
+    .stats-label {
+        color: #666;
+        font-size: 0.95rem;
+        margin-top: 0.5rem;
+    }
+
+    .course-card {
+        border: none;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s;
+        margin-bottom: 2rem;
+    }
+
+    .course-card:hover {
+        box-shadow: 0 4px 15px rgba(0, 53, 128, 0.2);
+    }
+
+    .course-card-header {
+        background: var(--vgc-primary);
+        color: white;
+        padding: 1rem;
+    }
+
+    .course-card-body {
+        padding: 1rem;
+    }
+
+    .badge-custom {
+        background-color: #e8f1f8;
+        color: var(--vgc-primary);
+        font-size: 0.85rem;
+        padding: 0.4rem 0.8rem;
+        border-radius: 20px;
+    }
+
+    .branch-card {
+        background: white;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .branch-card h5 {
+        color: var(--vgc-primary);
+        margin-bottom: 0.5rem;
+    }
+
+    .btn-vgc {
+        background-color: var(--vgc-primary);
+        border: none;
+        color: white;
+        padding: 0.6rem 1.2rem;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .btn-vgc:hover {
+        background-color: #002651;
+        color: white;
+    }
+
+    .admin-section {
+        background: #f8f9fa;
+        padding: 2rem;
+        border-radius: 10px;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+    }
+
+    .top-students-table {
+        background: white;
+        border-radius: 10px;
+        overflow: hidden;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .medal-gold { color: #FFD700; font-size: 1.5rem; }
+    .medal-silver { color: #C0C0C0; font-size: 1.5rem; }
+    .medal-bronze { color: #CD7F32; font-size: 1.5rem; }
+
+    .quick-action-btn {
+        background: white;
+        border: 2px solid var(--vgc-primary);
+        color: var(--vgc-primary);
+        padding: 0.8rem 1.5rem;
+        border-radius: 5px;
+        margin: 0.5rem;
+        transition: all 0.3s;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .quick-action-btn:hover {
+        background: var(--vgc-primary);
+        color: white;
+    }
+</style>
+
+<div class="hero-section">
+    <h1>Welcome to VGC College</h1>
+    <p>Excellence in Education • Empowering Future Leaders</p>
+    @if (User?.Identity?.IsAuthenticated == true)
+    {
+        <p style="font-size: 0.95rem; opacity: 0.9;">Logged in as: <strong>@(await UserManager.GetUserAsync(User))?.Email</strong></p>
+    }
 </div>
+
+<div class="container">
+    <!-- Stats Section -->
+    <div class="row mb-5" id="statsSection">
+        <div class="col-md-3">
+            <div class="stats-card">
+                <div>📚</div>
+                <div class="stats-number" id="totalStudents">-</div>
+                <div class="stats-label">Students</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stats-card">
+                <div>🎓</div>
+                <div class="stats-number" id="totalCourses">-</div>
+                <div class="stats-label">Courses</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stats-card">
+                <div>🏢</div>
+                <div class="stats-number" id="totalBranches">-</div>
+                <div class="stats-label">Branches</div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="stats-card">
+                <div>👨‍🏫</div>
+                <div class="stats-number" id="totalFaculty">-</div>
+                <div class="stats-label">Faculty</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Recent Courses Section -->
+    <h2 class="mb-4">Recent Courses</h2>
+    <div class="row mb-5" id="coursesSection">
+        <p class="text-muted">Loading courses...</p>
+    </div>
+
+    <!-- Branches Section -->
+    <h2 class="mb-4">Our Campuses</h2>
+    <div class="row mb-5" id="branchesSection">
+        <p class="text-muted">Loading branches...</p>
+    </div>
+
+    <!-- Admin Dashboard Section -->
+    @if (User?.IsInRole("Admin") == true)
+    {
+        <div class="admin-section">
+            <h3>📊 Admin Dashboard</h3>
+
+            <h4 class="mt-4 mb-3">Top 3 Students by Average Grade</h4>
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead style="background-color: var(--vgc-primary); color: white;">
+                        <tr>
+                            <th>Rank</th>
+                            <th>Student</th>
+                            <th>Student ID</th>
+                            <th>Average Grade</th>
+                            <th>Enrolled Courses</th>
+                        </tr>
+                    </thead>
+                    <tbody id="topStudentsTable">
+                        <tr>
+                            <td colspan="5" class="text-muted text-center">Loading...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h4 class="mt-5 mb-3">Quick Actions</h4>
+            <div>
+                <a href="/Admin/Index" class="quick-action-btn">📊 View Dashboard</a>
+                <a href="/Student/Index" class="quick-action-btn">👥 Manage Students</a>
+                <a href="/Course/Index" class="quick-action-btn">📚 Manage Courses</a>
+                <a href="/Branch/Index" class="quick-action-btn">🏢 Manage Branches</a>
+            </div>
+        </div>
+    }
+
+    <!-- Call to Action -->
+    @if (User?.Identity?.IsAuthenticated != true)
+    {
+        <div class="text-center mb-5">
+            <h3>Join VGC College Today</h3>
+            <p class="text-muted">Sign in to access your dashboard and courses</p>
+            <a href="/Account/Login" class="btn btn-vgc btn-lg">Login</a>
+            <a href="/Account/Register" class="btn btn-outline-primary btn-lg ms-2">Register</a>
+        </div>
+    }
+</div>
+
+<footer class="mt-5 py-4 border-top text-muted text-center">
+    <p>&copy; 2026 VGC College Management System. All rights reserved.</p>
+</footer>
+
+<script>
+    // Load data from API or server
+    async function loadDashboardData() {
+        try {
+            // Fetch stats from server-side
+            const response = await fetch('/api/dashboard/stats');
+            if (response.ok) {
+                const data = await response.json();
+                document.getElementById('totalStudents').textContent = data.totalStudents || 0;
+                document.getElementById('totalCourses').textContent = data.totalCourses || 0;
+                document.getElementById('totalBranches').textContent = data.totalBranches || 0;
+                document.getElementById('totalFaculty').textContent = data.totalFaculty || 0;
+
+                // Load courses
+                loadCourses(data.recentCourses);
+                // Load branches
+                loadBranches(data.branches);
+                // Load top students
+                if (data.topStudents) {
+                    loadTopStudents(data.topStudents);
+                }
+            }
+        } catch (error) {
+            console.error('Error loading dashboard data:', error);
+        }
+    }
+
+    function loadCourses(courses) {
+        const coursesSection = document.getElementById('coursesSection');
+        if (!courses || courses.length === 0) {
+            coursesSection.innerHTML = '<p class="text-muted col-12">No courses available.</p>';
+            return;
+        }
+
+        let html = '';
+        courses.forEach(course => {
+            html += `
+                <div class="col-md-4">
+                    <div class="course-card">
+                        <div class="course-card-header">
+                            <h5 class="mb-0">${course.name}</h5>
+                        </div>
+                        <div class="course-card-body">
+                            <p class="mb-2"><strong>Branch:</strong> <span class="badge-custom">${course.branchName}</span></p>
+                            <p class="mb-2"><strong>Duration:</strong> ${new Date(course.startDate).toLocaleDateString()} - ${new Date(course.endDate).toLocaleDateString()}</p>
+                            <p class="mb-0"><strong>Enrolled:</strong> ${course.enrolledCount} students</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+        coursesSection.innerHTML = html;
+    }
+
+    function loadBranches(branches) {
+        const branchesSection = document.getElementById('branchesSection');
+        if (!branches || branches.length === 0) {
+            branchesSection.innerHTML = '<p class="text-muted col-12">No branches available.</p>';
+            return;
+        }
+
+        let html = '';
+        branches.forEach(branch => {
+            html += `
+                <div class="col-md-4">
+                    <div class="branch-card">
+                        <h5>🏢 ${branch.name}</h5>
+                        <p class="text-muted mb-2">${branch.address}</p>
+                        <p><strong>${branch.coursesCount}</strong> courses</p>
+                    </div>
+                </div>
+            `;
+        });
+        branchesSection.innerHTML = html;
+    }
+
+    function loadTopStudents(students) {
+        const tableBody = document.getElementById('topStudentsTable');
+        if (!students || students.length === 0) {
+            tableBody.innerHTML = '<tr><td colspan="5" class="text-muted text-center">No student data available.</td></tr>';
+            return;
+        }
+
+        let html = '';
+        const medals = ['🥇', '🥈', '🥉'];
+        students.forEach((student, index) => {
+            html += `
+                <tr>
+                    <td><strong>${medals[index]}</strong></td>
+                    <td>${student.firstName} ${student.lastName}</td>
+                    <td><span class="badge bg-info">${student.studentNumber}</span></td>
+                    <td><strong>${(student.averageGrade || 0).toFixed(1)}</strong>/100</td>
+                    <td>${student.coursesCount} courses</td>
+                </tr>
+            `;
+        });
+        tableBody.innerHTML = html;
+    }
+
+    // Load data when page loads
+    document.addEventListener('DOMContentLoaded', loadDashboardData);
+</script>
