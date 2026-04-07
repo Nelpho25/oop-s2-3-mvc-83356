@@ -35,7 +35,8 @@ jobs:
           --no-build 
           --verbosity normal 
           --logger "trx;LogFileName=test-results.trx" 
-          --collect:"XPlat Code Coverage"
+          --collect:"XPlat Code Coverage" 
+          --settings tests/VgcCollege.Tests/coverlet.runsettings
           --results-directory ./TestResults
 
       - name: Install ReportGenerator
